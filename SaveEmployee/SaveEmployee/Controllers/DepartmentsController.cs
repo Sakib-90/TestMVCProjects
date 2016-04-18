@@ -49,10 +49,12 @@ namespace SaveEmployee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Code,Name")] Department department)
         {
+            ViewBag.Message = "Department Not saved";
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
                 db.SaveChanges();
+                ViewBag.Message = "Department Saved Successfuly";
                 return RedirectToAction("Index");
             }
 
