@@ -16,7 +16,7 @@ namespace SaveEmployee.Controllers
         private SaveDepartmentContext db = new SaveDepartmentContext();
 
         // GET: Departments
-        public ActionResult Index()
+        public ActionResult ShowAllDepartments()
         {
             return View(db.Departments.ToList());
         }
@@ -45,20 +45,49 @@ namespace SaveEmployee.Controllers
         // POST: Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        public JsonResult IsDepartmentCodeExists(string code)
+        {
+            return Json(!db.Departments.Any(x => x.Code == code), JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult IsDepartmentExists(string name)
+        {
+            return Json(!db.Departments.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
+        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Code,Name")] Department department)
         {
             ViewBag.Message = "Department Not saved";
+            ViewBag.Status = "Error";
+            
             if (ModelState.IsValid)
             {
-                db.Departments.Add(department);
-                db.SaveChanges();
-                ViewBag.Message = "Department Saved Successfuly";
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Departments.Add(department);
+                    db.SaveChanges();
+                    ViewBag.Status = "Success";
+                    ViewBag.Message = "Department Saved Successfuly";
+                    //TempData["shortMessage"] = "Department Saved Successfuly";
+
+                    //ViewBag.Message = TempData["shortMessage"].ToString();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Status = "Error";
+                    ViewBag.Message = "Department Code and Name required";
+                }
+                
+                //return RedirectToAction("Create");
+                ModelState.Clear();
+               // return View();
             }
 
-            return View(department);
+            //return View(department);
+            return View();
         }
 
         // GET: Departments/Edit/5
@@ -87,7 +116,7 @@ namespace SaveEmployee.Controllers
             {
                 db.Entry(department).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowAllDepartments");
             }
             return View(department);
         }
@@ -115,7 +144,7 @@ namespace SaveEmployee.Controllers
             Department department = db.Departments.Find(id);
             db.Departments.Remove(department);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowAllDepartments");
         }
 
         protected override void Dispose(bool disposing)
