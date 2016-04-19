@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace SaveEmployee
+namespace UniversityApplication
 {
     public class FilterConfig
     {

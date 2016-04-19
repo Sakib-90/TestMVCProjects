@@ -1,4 +1,4 @@
-﻿namespace SaveEmployee.Models
+﻿namespace UniversityApplication.Models
 {
     public class Teacher : Person
     {

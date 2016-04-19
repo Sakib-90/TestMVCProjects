@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SaveEmployee.Models
+namespace UniversityApplication.Models
 {
     public class Student : Person
     {

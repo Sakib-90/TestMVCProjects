@@ -7,8 +7,8 @@ using UniversityApplication.Models;
 
 namespace UniversityApplication.Context
 {
-    public class SaveDepartmentContext : DbContext
+    public class SaveCourseContext : DbContext
     {
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

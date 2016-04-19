@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace SaveEmployee
+namespace UniversityApplication
 {
     public class BundleConfig
     {
