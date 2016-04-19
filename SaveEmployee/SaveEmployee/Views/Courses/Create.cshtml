@@ -54,8 +54,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+
+                @Html.DropDownList("Test Drop Down List", new SelectList(new [] {"First Value","Second Value", "Third Value"}))
+
+                @*@Html.DropDownListFor(model => model.Department, ViewBag.DepartmentSelection);*@
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
             </div>
         </div>
 

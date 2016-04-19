@@ -19,6 +19,12 @@ namespace SaveEmployee.Controllers
         // GET: Courses/Create
         public ActionResult Create()
         {
+            //ViewBag.DepartmentSelection = db.Departments.Select(h => new SelectListItem
+            //{
+            //    Value = h.Name,
+            //    Text = h.Name
+            //});
+            
             return View();
         }
 
