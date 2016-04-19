@@ -13,35 +13,24 @@ namespace SaveEmployee.Controllers
 {
     public class CoursesController : Controller
     {
-        private SaveCourseContext db = new SaveCourseContext();
+        private SaveDepartmentContext db = new SaveDepartmentContext(); 
 
-        // GET: Courses
-        public ActionResult ShowAllCourses()
-        {
-            return View(db.Courses.ToList());
-        }
-
-        // GET: Courses/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = db.Courses.Find(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
+       
         // GET: Courses/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        public JsonResult IsCourseCodeExists(string code)
+        {
+            return Json(!db.Departments.Any(x => x.Code == code), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult IsCourseNameExists(string name)
+        {
+            return Json(!db.Departments.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
+        }
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -49,71 +38,28 @@ namespace SaveEmployee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,Department,Semester")] Course course)
         {
+            ViewBag.Message = "Course Not saved";
+            ViewBag.Status = "Error";
+
             if (ModelState.IsValid)
             {
-                db.Courses.Add(course);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Courses.Add(course);
+                    db.SaveChanges();
+                    ViewBag.Status = "Success";
+                    ViewBag.Message = "Course Saved Successfuly";
+                    
+                }
+                catch (Exception)
+                {
+                    ViewBag.Status = "Error";
+                    ViewBag.Message = "Course Code and Name required";
+                }
+                ModelState.Clear();
             }
-
-            return View(course);
-        }
-
-        // GET: Courses/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = db.Courses.Find(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
-        // POST: Courses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Code,Name,Credit,Description,Department,Semester")] Course course)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(course).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(course);
-        }
-
-        // GET: Courses/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = db.Courses.Find(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
-        // POST: Courses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            //return View(department);
+            return View();
         }
 
         protected override void Dispose(bool disposing)

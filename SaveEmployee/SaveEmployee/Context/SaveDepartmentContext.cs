@@ -10,5 +10,6 @@ namespace UniversityApplication.Context
     public class SaveDepartmentContext : DbContext
     {
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

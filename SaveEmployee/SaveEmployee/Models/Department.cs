@@ -16,7 +16,7 @@ namespace UniversityApplication.Models
         public string Code { get; set; }
         
         [Required]
-        [Remote("IsDepartmentExists", "Departments", ErrorMessage = "Department Name already in use. Please try new name")]
+        [Remote("IsDepartmentNameExists", "Departments", ErrorMessage = "Department Name already in use. Please try new name")]
         [DisplayName("Department Name")]
         public string Name { get; set; }
     }
