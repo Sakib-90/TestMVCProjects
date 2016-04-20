@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,8 +14,8 @@ namespace SaveEmployee.Controllers
 {
     public class CoursesController : Controller
     {
-        private SaveDepartmentContext db = new SaveDepartmentContext(); 
-
+        private SaveDepartmentContext db = new SaveDepartmentContext();
+        SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
        
         // GET: Courses/Create
         public ActionResult Create()
@@ -24,8 +25,54 @@ namespace SaveEmployee.Controllers
             //    Value = h.Name,
             //    Text = h.Name
             //});
-            
+
+            var departments = GetDepartments();
+
+            List<SelectListItem> departmentList = new List<SelectListItem>();
+
+            foreach (var department in departments)
+            {
+                departmentList.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = department.Name,
+                        Text = department.Name
+                    }
+                    );
+            }
+
+            ViewBag.Departments = departmentList;
             return View();
+        }
+
+        public List<Department> GetDepartments()
+        {
+            List<Department> departmentList = new List<Department>();
+
+            string query = "SELECT * FROM Departments ORDER BY Name";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string Name = reader["Name"].ToString();
+                string code = reader["code"].ToString();
+                Department aDepartment = new Department();
+
+                aDepartment.Name = Name;
+                aDepartment.Code = code;
+
+                departmentList.Add(aDepartment);
+            }
+
+            connection.Close();
+
+            return departmentList;
         }
 
         public JsonResult IsCourseCodeExists(string code)
@@ -44,6 +91,24 @@ namespace SaveEmployee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,Department,Semester")] Course course)
         {
+            var departments = GetDepartments();
+
+            List<SelectListItem> departmentList = new List<SelectListItem>();
+
+            foreach (var department in departments)
+            {
+                departmentList.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = department.Name,
+                        Text = department.Name
+                    }
+                    );
+            }
+
+            ViewBag.Departments = departmentList;
+            
             ViewBag.Message = "Course Not saved";
             ViewBag.Status = "Error";
 
