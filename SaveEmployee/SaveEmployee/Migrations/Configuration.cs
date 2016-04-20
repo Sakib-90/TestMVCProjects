@@ -5,14 +5,14 @@ namespace SaveEmployee.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<UniversityApplication.Context.SaveDepartmentContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<UniversityApplication.Context.ApplicationContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(UniversityApplication.Context.SaveDepartmentContext context)
+        protected override void Seed(UniversityApplication.Context.ApplicationContext context)
         {
             //  This method will be called after migrating to the latest version.
 

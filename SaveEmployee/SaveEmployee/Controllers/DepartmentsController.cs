@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
@@ -13,8 +8,9 @@ namespace UniversityApplication.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private SaveDepartmentContext db = new SaveDepartmentContext();
+        private ApplicationContext db = new ApplicationContext();
 
+       
         // GET: Departments
         public ActionResult ShowAllDepartments()
         {
@@ -27,9 +23,8 @@ namespace UniversityApplication.Controllers
             return View();
         }
 
+
         // POST: Departments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         public JsonResult IsDepartmentCodeExists(string code)
         {
@@ -56,9 +51,7 @@ namespace UniversityApplication.Controllers
                     db.SaveChanges();
                     ViewBag.Status = "Success";
                     ViewBag.Message = "Department Saved Successfuly";
-                    //TempData["shortMessage"] = "Department Saved Successfuly";
-
-                    //ViewBag.Message = TempData["shortMessage"].ToString();
+                    
                 }
                 catch (Exception)
                 {
@@ -66,12 +59,10 @@ namespace UniversityApplication.Controllers
                     ViewBag.Message = "Department Code and Name required";
                 }
                 
-                //return RedirectToAction("Create");
                 ModelState.Clear();
-               // return View();
             }
 
-            //return View(department);
+            
             return View();
         }
 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace UniversityApplication.Models
@@ -18,7 +14,7 @@ namespace UniversityApplication.Models
         public string Code { get; set; }
 
         [Required]
-        [Remote("IsCourseNameExists", "Courses", ErrorMessage = "Course Name already in use. Please try new code")]
+        [Remote("IsCourseNameExists", "Courses", ErrorMessage = "Course Name already in use. Please try new Name")]
         [DisplayName("Course Name")]
         public string Name { get; set; }
 

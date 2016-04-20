@@ -119,10 +119,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Context\SaveDepartmentContext.cs" />
+    <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\DepartmentGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
