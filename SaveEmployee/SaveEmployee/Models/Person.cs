@@ -5,6 +5,7 @@ namespace UniversityApplication.Models
     public class Person
     {
         public string Name { get; set; }
+        [Key]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         public string Contact { get; set; }

@@ -13,33 +13,13 @@ namespace SaveEmployee.Controllers
         private ApplicationContext db = new ApplicationContext();
         
         DepartmentManager departmentManager = new DepartmentManager();
+        SemesterManager semesterManager = new SemesterManager();
        
         // GET: Courses/Create
         public ActionResult Create()
         {
-
-            var departments = departmentManager.GetDepartments();
-
-            //List<SelectListItem> departmentList = new List<SelectListItem>();
-
-            //foreach (var department in departments)
-            //{
-            //    departmentList.Add(
-
-            //        new SelectListItem()
-            //        {
-            //            Value = department.Name,
-            //            Text = department.Name
-            //        }
-            //        );
-            //}
-            List<SelectListItem> departmentList = departments.Select(department => new SelectListItem()
-            {
-                Value = department.Name, Text = department.Name
-            }).ToList();
-
-
-            ViewBag.Departments = departmentList;
+            GenerateDropDownValue();
+            
             return View();
         }
 
@@ -57,23 +37,7 @@ namespace SaveEmployee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,Department,Semester")] Course course)
         {
-            var departments = departmentManager.GetDepartments();
-
-            List<SelectListItem> departmentList = new List<SelectListItem>();
-
-            foreach (var department in departments)
-            {
-                departmentList.Add(
-
-                    new SelectListItem()
-                    {
-                        Value = department.Name,
-                        Text = department.Name
-                    }
-                    );
-            }
-
-            ViewBag.Departments = departmentList;
+            GenerateDropDownValue();
             
             ViewBag.Message = "Course Not saved";
             ViewBag.Status = "Error";
@@ -97,6 +61,45 @@ namespace SaveEmployee.Controllers
             }
             
             return View();
+        }
+
+        private void GenerateDropDownValue()
+        {
+            var departments = departmentManager.GetDepartments();
+
+            List<SelectListItem> departmentList = new List<SelectListItem>();
+
+            foreach (var department in departments)
+            {
+                departmentList.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = department.Name,
+                        Text = department.Name
+                    }
+                    );
+            }
+
+            ViewBag.Departments = departmentList;
+
+            var semesters = semesterManager.GetSemester();
+
+            List<SelectListItem> semesterList = new List<SelectListItem>();
+
+            foreach (var semester in semesters)
+            {
+                semesterList.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = semester,
+                        Text = semester
+                    }
+                    );
+            }
+
+            ViewBag.Semesters = semesterList;   
         }
 
         protected override void Dispose(bool disposing)

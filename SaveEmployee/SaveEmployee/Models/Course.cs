@@ -9,7 +9,7 @@ namespace UniversityApplication.Models
         [Key]
         [Required]
         [Remote("IsCourseCodeExists", "Courses", ErrorMessage = "Course Code already in use. Please try new code")]
-        [StringLength(7, ErrorMessage = "Must be at minimum 5 characters long.", MinimumLength = 5)]
+        [StringLength(50, ErrorMessage = "Must be at minimum 5 characters long.", MinimumLength = 5)]
         [DisplayName("Course Code")]
         public string Code { get; set; }
 

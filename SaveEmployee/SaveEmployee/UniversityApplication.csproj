@@ -120,11 +120,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
+    <Compile Include="DAL\SemesterGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +182,7 @@
     <Content Include="Views\Departments\Create.cshtml" />
     <Content Include="Views\Departments\ShowAllDepartments.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Teachers\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

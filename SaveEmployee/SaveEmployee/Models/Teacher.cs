@@ -1,4 +1,6 @@
-﻿namespace UniversityApplication.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace UniversityApplication.Models
 {
     public class Teacher : Person
     {
