@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using SaveEmployee.BLL;
+using UniversityApplication.BLL;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
 
-namespace SaveEmployee.Controllers
+namespace UniversityApplication.Controllers
 {
     public class CoursesController : Controller
     {

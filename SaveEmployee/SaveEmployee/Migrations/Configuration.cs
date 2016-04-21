@@ -1,4 +1,4 @@
-namespace SaveEmployee.Migrations
+namespace UniversityApplication.Migrations
 {
     using System;
     using System.Data.Entity;

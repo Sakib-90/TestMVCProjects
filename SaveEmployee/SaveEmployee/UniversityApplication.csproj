@@ -120,6 +120,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="BLL\DesignationManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -127,13 +128,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
+    <Compile Include="DAL\DesignationGateway.cs" />
     <Compile Include="DAL\SemesterGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604191412179_Initial.cs" />
-    <Compile Include="Migrations\201604191412179_Initial.Designer.cs">
-      <DependentUpon>201604191412179_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -193,11 +191,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604191412179_Initial.resx">
-      <DependentUpon>201604191412179_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

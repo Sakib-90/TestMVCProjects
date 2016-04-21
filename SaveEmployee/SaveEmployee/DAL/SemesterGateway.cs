@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using UniversityApplication.Models;
 
-namespace SaveEmployee.DAL
+namespace UniversityApplication.DAL
 {
     public class SemesterGateway
     {

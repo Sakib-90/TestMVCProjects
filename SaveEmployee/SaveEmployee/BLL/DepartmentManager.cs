@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SaveEmployee.DAL;
+using UniversityApplication.DAL;
 using UniversityApplication.Models;
 
-namespace SaveEmployee.BLL
+namespace UniversityApplication.BLL
 {
     public class DepartmentManager
     {

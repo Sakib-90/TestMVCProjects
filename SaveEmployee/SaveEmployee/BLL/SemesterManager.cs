@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SaveEmployee.DAL;
+using UniversityApplication.DAL;
 
-namespace SaveEmployee.BLL
+namespace UniversityApplication.BLL
 {
     public class SemesterManager
     {
