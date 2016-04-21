@@ -15,8 +15,6 @@ namespace UniversityApplication.Controllers
         // GET: CourseTeacher
         public ActionResult AssignCourse()
         {
-
-
             List<Department> allDepartments = new List<Department>();
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
@@ -27,7 +25,7 @@ namespace UniversityApplication.Controllers
             }
 
             ViewBag.Departments = new SelectList(allDepartments, "Name", "Name");
-            ViewBag.TeachersName = new SelectList(allTeachers,"Name","Name");
+            ViewBag.TeachersName = new SelectList(allTeachers, "Email", "Name");
             ViewBag.CourseCode = new SelectList(allCourses,"Code","Code");
 
             return View();
@@ -40,6 +38,8 @@ namespace UniversityApplication.Controllers
             List<Department> allDepartments = new List<Department>();
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
+
+            double credit = 0.0;
 
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -62,14 +62,36 @@ namespace UniversityApplication.Controllers
                                 .OrderBy(a => a.Name)
                                 .ToList();
                     }
-
-
                 }
             }
 
             ViewBag.Departments = new SelectList(allDepartments, "Name", "Name",courseTeacher.Department);
-            ViewBag.TeachersName = new SelectList(allTeachers, "Name", "Name",courseTeacher.Teacher);
+            ViewBag.TeachersName = new SelectList(allTeachers, "Email", "Name", courseTeacher.Teacher);
             ViewBag.CourseCode = new SelectList(allCourses, "Code", "Code",courseTeacher.CourseCode);
+
+            //string email = courseTeacher.Teacher;
+
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
+                
+            //  //  allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
+
+            //    if (courseTeacher != null)
+            //    {
+            //        if (courseTeacher.Teacher != null)
+            //        {
+            //            //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
+
+            //            credit = 10;
+
+            //        }
+                    
+            //    }
+            //}
+
+            //ViewBag.CreditToTake = credit;
+
 
             if (ModelState.IsValid)
             {
@@ -79,15 +101,9 @@ namespace UniversityApplication.Controllers
                     db.SaveChanges();
                     ModelState.Clear();
                     courseTeacher = null;
-                    //ViewBag.Message = "Successfully submitted";
                 }
             }
-            else
-            {
-                //ViewBag.Message = "Failed! Please try again";
-            }
             return View(courseTeacher);
-
         }
 
         [HttpGet]
@@ -119,6 +135,8 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
+
+        
 
         [HttpGet]
         public JsonResult GetCourseCode(string departmentName)
