@@ -7,8 +7,10 @@ namespace UniversityApplication.Models
     public class Teacher : Person
     {
         public string Designation { get; set; }
+        
         [DisplayName("Credit to be taken")]
-        public int Credit { get; set; }
+        [Range(0.0, double.MaxValue,ErrorMessage = "Credit Must be a positive value")]
+        public double Credit { get; set; }
 
         [Key]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
