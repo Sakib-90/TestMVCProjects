@@ -119,22 +119,28 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
     <Compile Include="BLL\DesignationManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
+    <Compile Include="BLL\TeacherManager.cs" />
     <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\CourseTeacherController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="DAL\CourseGateway.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
     <Compile Include="DAL\DesignationGateway.cs" />
     <Compile Include="DAL\SemesterGateway.cs" />
+    <Compile Include="DAL\TeachersGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseTeacher.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Student.cs" />
@@ -181,6 +187,7 @@
     <Content Include="Views\Departments\ShowAllDepartments.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
+    <Content Include="Views\CourseTeacher\CourseTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
