@@ -187,7 +187,7 @@
     <Content Include="Views\Departments\ShowAllDepartments.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
-    <Content Include="Views\CourseTeacher\CourseTeacher.cshtml" />
+    <Content Include="Views\CourseTeacher\AssignCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

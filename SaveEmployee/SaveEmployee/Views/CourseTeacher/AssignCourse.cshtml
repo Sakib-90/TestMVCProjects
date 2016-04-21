@@ -8,7 +8,7 @@
 <h2>CourseTeacher</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AssignCourse", "CourseTeacher", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -19,14 +19,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Department, new SelectList(ViewBag.Departments, "Value", "Text"), "Select Department", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Department, @ViewBag.Departments as SelectList, "Select Department", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Teacher, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Teacher, new SelectList(ViewBag.TeachersName, "Value", "Text"), "Select Teacher", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Teacher, @ViewBag.TeachersName as SelectList, "Select Teacher", new { @class = "form-control" })
             </div>
         </div>
 
@@ -46,12 +46,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CourseCode, new SelectList(ViewBag.CourseCode, "Value", "Text"), "Select Course", new { @class = "form-control" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,4 +83,36 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script language="javascript">
+        $(document).ready(function () {
+            $("#Department").change(function () {
+                // this will call when Country Dropdown select change
+                var departmentName = $("#Department").val();
+                if (departmentName!=null) {
+                    var ddTeacher = $("#Teacher");
+                    ddTeacher.empty(); // this line is for clear all items from State dropdown
+                    ddTeacher.append($("<option></option").val("").html("Select Teacher"));
+
+                    // Here I will call Controller Action via Jquery to load State for selected Country
+                    $.ajax({
+                        url: "@Url.Action("GetTeachers", "CourseTeacher")",
+                        type: "GET",
+                        data: { departmentName: departmentName },
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (i, val) {
+                                ddTeacher.append(
+                                        $("<option></option>").val(val.Name).html(val.Name)
+                                    );
+                            });
+                        },
+                        error: function () {
+                            alert("Error!");
+                        }
+                    });
+                }
+            });
+        });
+</script>
 }
