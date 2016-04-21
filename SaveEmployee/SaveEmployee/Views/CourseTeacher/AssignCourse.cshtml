@@ -46,12 +46,12 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.CourseCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CourseCode, new SelectList(ViewBag.CourseCode, "Value", "Text"), "Select Course", new { @class = "form-control" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,14 +87,16 @@
 <script language="javascript">
         $(document).ready(function () {
             $("#Department").change(function () {
-                // this will call when Country Dropdown select change
+                // this will call when Department Dropdown select change
                 var departmentName = $("#Department").val();
                 if (departmentName!=null) {
+
+
                     var ddTeacher = $("#Teacher");
-                    ddTeacher.empty(); // this line is for clear all items from State dropdown
+                    ddTeacher.empty(); // this line is for clear all items from Teacher dropdown
                     ddTeacher.append($("<option></option").val("").html("Select Teacher"));
 
-                    // Here I will call Controller Action via Jquery to load State for selected Country
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Country
                     $.ajax({
                         url: "@Url.Action("GetTeachers", "CourseTeacher")",
                         type: "GET",
@@ -111,6 +113,29 @@
                             alert("Error!");
                         }
                     });
+
+                    var ddCourseCode = $("#CourseCode");
+                    ddCourseCode.empty(); // this line is for clear all items from CourseCode dropdown
+                    ddCourseCode.append($("<option></option").val("").html("Select Course"));
+
+                    // Here I will call Controller Action via Jquery to load CourseCode for selected Department
+                    $.ajax({
+                        url: "@Url.Action("GetCourseCode", "CourseTeacher")",
+                        type: "GET",
+                    data: { departmentName: departmentName },
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            ddCourseCode.append(
+                                    $("<option></option>").val(val.Code).html(val.Code)
+                                );
+                        });
+                    },
+                    error: function () {
+                        alert("Error!");
+                    }
+                });
+
                 }
             });
         });

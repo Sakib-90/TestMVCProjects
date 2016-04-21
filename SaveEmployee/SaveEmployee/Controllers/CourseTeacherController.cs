@@ -19,6 +19,7 @@ namespace UniversityApplication.Controllers
 
             List<Department> allDepartments = new List<Department>();
             List<Teacher> allTeachers = new List<Teacher>();
+            List<Course> allCourses = new List<Course>();
 
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -27,6 +28,7 @@ namespace UniversityApplication.Controllers
 
             ViewBag.Departments = new SelectList(allDepartments, "Name", "Name");
             ViewBag.TeachersName = new SelectList(allTeachers,"Name","Name");
+            ViewBag.CourseCode = new SelectList(allCourses,"Code","Code");
 
             return View();
         }
@@ -37,22 +39,37 @@ namespace UniversityApplication.Controllers
         {
             List<Department> allDepartments = new List<Department>();
             List<Teacher> allTeachers = new List<Teacher>();
+            List<Course> allCourses = new List<Course>();
 
             using (ApplicationContext db = new ApplicationContext())
             {
                 allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
 
-                if (courseTeacher != null && courseTeacher.Teacher != null)
+                if (courseTeacher != null) 
                 {
-                    allTeachers =
-                        db.Teachers.Where(a => a.Department.Equals(courseTeacher.Department))
-                            .OrderBy(a => a.Name)
-                            .ToList();
+                    if (courseTeacher.Teacher != null)
+                    {
+                        allTeachers =
+                            db.Teachers.Where(a => a.Department.Equals(courseTeacher.Department))
+                                .OrderBy(a => a.Name)
+                                .ToList();
+                    }
+
+                    if (courseTeacher.CourseCode != null)
+                    {
+                       allCourses =
+                            db.Courses.Where(a => a.Code.Equals(courseTeacher.CourseCode))
+                                .OrderBy(a => a.Name)
+                                .ToList();
+                    }
+
+
                 }
             }
 
             ViewBag.Departments = new SelectList(allDepartments, "Name", "Name",courseTeacher.Department);
             ViewBag.TeachersName = new SelectList(allTeachers, "Name", "Name",courseTeacher.Teacher);
+            ViewBag.CourseCode = new SelectList(allCourses, "Code", "Code",courseTeacher.CourseCode);
 
             if (ModelState.IsValid)
             {
@@ -90,6 +107,36 @@ namespace UniversityApplication.Controllers
                 return new JsonResult
                 {
                     Data = allTeachers,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetCourseCode(string departmentName)
+        {
+            List<Course> allCourses = new List<Course>();
+
+            if (departmentName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    allCourses = db.Courses.Where(a => a.Department.Equals(departmentName)).OrderBy(a => a.Name).ToList();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = allCourses,
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
