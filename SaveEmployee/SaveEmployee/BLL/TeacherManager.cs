@@ -10,9 +10,9 @@ namespace UniversityApplication.BLL
     public class TeacherManager
     {
         TeachersGateway gateway = new TeachersGateway();
-        public List<Teacher> GetTeachers()
+        public List<Teacher> GetTeachers(string departmentName)
         {
-            return gateway.GetTeachers();
+            return gateway.GetTeachers(departmentName);
         }
     }
 }

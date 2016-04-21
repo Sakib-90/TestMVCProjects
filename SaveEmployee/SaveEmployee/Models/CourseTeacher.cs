@@ -9,6 +9,7 @@ namespace UniversityApplication.Models
     public class CourseTeacher
     {
         public string Department { get; set; }
+        
         public string Teacher { get; set; }
         [DisplayName("Credit to be taken")]
         public double CreditToTake { get; set; }

@@ -18,14 +18,9 @@ namespace UniversityApplication.Controllers
         // GET: CourseTeacher
         public ActionResult CourseTeacher()
         {
-            GenerateDropDownValue();
-            return View();
-        }
-
-        private void GenerateDropDownValue()
-        {
+            //GenerateDropDownValue();
             var departments = departmentManager.GetDepartments();
-
+            
             List<SelectListItem> departmentList = new List<SelectListItem>();
 
             foreach (var department in departments)
@@ -42,57 +37,100 @@ namespace UniversityApplication.Controllers
 
             ViewBag.Departments = departmentList;
 
-            var teachersList = teacherManager.GetTeachers();
+            return View();
+        }
 
-            List<SelectListItem> teacherNameList = new List<SelectListItem>();
+        [HttpPost]
+        public ActionResult GetTeacher(string departmentName)
+        {
+            var teachersList = teacherManager.GetTeachers(departmentName);
 
-            foreach (var teacher in teachersList)
+            List<SelectListItem> teacherNameList = teachersList.Select(teacher => new SelectListItem()
             {
-                teacherNameList.Add(
-
-                    new SelectListItem()
-                    {
-                        Value = teacher.Name,
-                        Text = teacher.Name
-                    }
-                    );
-            }
+                Value = teacher.Name, Text = teacher.Name
+            }).ToList();
 
             ViewBag.TeachersName = teacherNameList;
 
-            //List<SelectListItem> teacherCreditList = new List<SelectListItem>();
-
-            //foreach (var teacher in teachersList)
-            //{
-            //    teacherCreditList.Add(
-
-            //        new SelectListItem()
-            //        {
-            //            Value = teacher.Credit.ToString(),
-            //            Text = teacher.Credit.ToString()
-            //        }
-            //        );
-            //}
-
-            //ViewBag.TeachersCredit = teacherCreditList; 
-
-            var courseList = courseManager.GetCourses();
-
-            List<SelectListItem> courseCodeList = new List<SelectListItem>();
-
-            foreach (var course in courseList)
-            {
-                courseCodeList.Add(
-
-                    new SelectListItem()
-                    {
-                        Value = course.Code,
-                        Text = course.Code
-                    }
-                    );
-            }
-
-            ViewBag.CourseCode = courseCodeList;
+            return Json(teacherNameList, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
+        //private void GenerateDropDownValue()
+        //{
+        //    var departments = departmentManager.GetDepartments();
+
+        //    List<SelectListItem> departmentList = new List<SelectListItem>();
+
+        //    foreach (var department in departments)
+        //    {
+        //        departmentList.Add(
+
+        //            new SelectListItem()
+        //            {
+        //                Value = department.Name,
+        //                Text = department.Name
+        //            }
+        //            );
+        //    }
+
+        //    ViewBag.Departments = departmentList;
+
+        //    var teachersList = teacherManager.GetTeachers();
+
+        //    List<SelectListItem> teacherNameList = new List<SelectListItem>();
+
+        //    foreach (var teacher in teachersList)
+        //    {
+        //        teacherNameList.Add(
+
+        //            new SelectListItem()
+        //            {
+        //                Value = teacher.Name,
+        //                Text = teacher.Name
+        //            }
+        //            );
+        //    }
+
+        //    ViewBag.TeachersName = teacherNameList;
+
+        //    //List<SelectListItem> teacherCreditList = new List<SelectListItem>();
+
+        //    //foreach (var teacher in teachersList)
+        //    //{
+        //    //    teacherCreditList.Add(
+
+        //    //        new SelectListItem()
+        //    //        {
+        //    //            Value = teacher.Credit.ToString(),
+        //    //            Text = teacher.Credit.ToString()
+        //    //        }
+        //    //        );
+        //    //}
+
+        //    //ViewBag.TeachersCredit = teacherCreditList; 
+
+        //    var courseList = courseManager.GetCourses();
+
+        //    List<SelectListItem> courseCodeList = new List<SelectListItem>();
+
+        //    foreach (var course in courseList)
+        //    {
+        //        courseCodeList.Add(
+
+        //            new SelectListItem()
+        //            {
+        //                Value = course.Code,
+        //                Text = course.Code
+        //            }
+        //            );
+        //    }
+
+        //    ViewBag.CourseCode = courseCodeList;
+        //}
     }
 }

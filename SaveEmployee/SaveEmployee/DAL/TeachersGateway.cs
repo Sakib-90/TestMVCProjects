@@ -10,11 +10,11 @@ namespace UniversityApplication.DAL
     public class TeachersGateway
     {
         SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
-        public List<Teacher> GetTeachers()
+        public List<Teacher> GetTeachers(string departmentName)
         {
             List<Teacher> teacherList = new List<Teacher>();
 
-            string query = "SELECT * FROM Teachers ORDER BY Name";
+            string query = "SELECT * FROM Teachers WHERE Department = '"+departmentName+"'ORDER BY Name";
 
             SqlCommand command = new SqlCommand(query, connection);
 
