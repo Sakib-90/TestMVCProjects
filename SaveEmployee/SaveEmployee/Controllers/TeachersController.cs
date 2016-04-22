@@ -27,7 +27,7 @@ namespace UniversityApplication.Controllers
         }
         public JsonResult IsEmailExists(string email)
         {
-            return Json(!db.Teachers.Any(x => x.Email == email), JsonRequestBehavior.AllowGet);
+            return Json(!db.Teachers.Any(x => x.TeacherEmail == email), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -72,8 +72,8 @@ namespace UniversityApplication.Controllers
 
                     new SelectListItem()
                     {
-                        Value = department.Name,
-                        Text = department.Name
+                        Value = department.DepartmentName,
+                        Text = department.DepartmentName
                     }
                     );
             }

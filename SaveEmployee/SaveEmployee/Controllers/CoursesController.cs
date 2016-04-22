@@ -25,17 +25,17 @@ namespace UniversityApplication.Controllers
 
         public JsonResult IsCourseCodeExists(string code)
         {
-            return Json(!db.Courses.Any(x => x.Code == code), JsonRequestBehavior.AllowGet);
+            return Json(!db.Courses.Any(x => x.CourseCode == code), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult IsCourseNameExists(string name)
         {
-            return Json(!db.Courses.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
+            return Json(!db.Courses.Any(x => x.CourseName == name), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,Department,Semester")] Course course)
+        public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,CourseDepartmentCode,Semester")] Course course)
         {
             GenerateDropDownValue();
             
@@ -44,19 +44,19 @@ namespace UniversityApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     db.Courses.Add(course);
                     db.SaveChanges();
                     ViewBag.Status = "Success";
                     ViewBag.Message = "Course Saved Successfuly";
                     
-                }
-                catch (Exception)
-                {
+                //}
+                //catch (Exception)
+                //{
                     ViewBag.Status = "Error";
                     ViewBag.Message = "Course Code and Name required";
-                }
+                //}
                 ModelState.Clear();
             }
             
@@ -75,8 +75,8 @@ namespace UniversityApplication.Controllers
 
                     new SelectListItem()
                     {
-                        Value = department.Name,
-                        Text = department.Name
+                        Value = department.Code,
+                        Text = department.DepartmentName
                     }
                     );
             }

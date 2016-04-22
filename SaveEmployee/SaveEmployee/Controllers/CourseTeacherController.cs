@@ -21,7 +21,7 @@ namespace UniversityApplication.Controllers
 
             using (ApplicationContext db = new ApplicationContext())
             {
-                allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
+                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
             }
 
             ViewBag.Departments = new SelectList(allDepartments, "Name", "Name");
@@ -43,54 +43,54 @@ namespace UniversityApplication.Controllers
 
             using (ApplicationContext db = new ApplicationContext())
             {
-                allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
+                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
 
                 if (courseTeacher != null) 
                 {
-                    if (courseTeacher.Teacher != null)
+                    if (courseTeacher.TeacherEmail != null)
                     {
                         allTeachers =
-                            db.Teachers.Where(a => a.Department.Equals(courseTeacher.Department))
-                                .OrderBy(a => a.Name)
+                            db.Teachers.Where(a => a.TeacherDepartmentCode.Equals(courseTeacher.TeacherDepartmentCode))
+                                .OrderBy(a => a.TeacherName)
                                 .ToList();
                     }
 
-                    if (courseTeacher.CourseCode != null)
+                    if (courseTeacher.TeacherCourseCode != null)
                     {
                        allCourses =
-                            db.Courses.Where(a => a.Code.Equals(courseTeacher.CourseCode))
-                                .OrderBy(a => a.Name)
+                            db.Courses.Where(a => a.CourseCode.Equals(courseTeacher.TeacherCourseCode))
+                                .OrderBy(a => a.CourseName)
                                 .ToList();
                     }
                 }
             }
 
-            ViewBag.Departments = new SelectList(allDepartments, "Name", "Name",courseTeacher.Department);
-            ViewBag.TeachersName = new SelectList(allTeachers, "Email", "Name", courseTeacher.Teacher);
-            ViewBag.CourseCode = new SelectList(allCourses, "Code", "Code",courseTeacher.CourseCode);
+            ViewBag.Departments = new SelectList(allDepartments, "Name", "Name",courseTeacher.TeacherDepartmentCode);
+            ViewBag.TeachersName = new SelectList(allTeachers, "Email", "Name", courseTeacher.TeacherEmail);
+            ViewBag.CourseCode = new SelectList(allCourses, "Code", "Code",courseTeacher.TeacherCourseCode);
 
-            //string email = courseTeacher.Teacher;
+            string email = courseTeacher.TeacherEmail;
 
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
-                
-            //  //  allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
 
-            //    if (courseTeacher != null)
-            //    {
-            //        if (courseTeacher.Teacher != null)
-            //        {
-            //            //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
+                //  allDepartments = db.Departments.OrderBy(a => a.Name).ToList();
 
-            //            credit = 10;
+                if (courseTeacher != null)
+                {
+                    if (courseTeacher.TeacherEmail != null)
+                    {
+                        //credit = Convert.ToDouble(db.Teachers.Where(a => a.Email.Equals(email)));
 
-            //        }
-                    
-            //    }
-            //}
+                        credit = 10;
 
-            //ViewBag.CreditToTake = credit;
+                    }
+
+                }
+            }
+
+            ViewBag.CreditToTake = credit;
 
 
             if (ModelState.IsValid)
@@ -115,7 +115,7 @@ namespace UniversityApplication.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    allTeachers = db.Teachers.Where(a => a.Department.Equals(departmentName)).OrderBy(a => a.Name).ToList();
+                    allTeachers = db.Teachers.Where(a => a.TeacherDepartmentCode.Equals(departmentName)).OrderBy(a => a.TeacherName).ToList();
                 }
             }
             if (Request.IsAjaxRequest())
@@ -147,7 +147,7 @@ namespace UniversityApplication.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    allCourses = db.Courses.Where(a => a.Department.Equals(departmentName)).OrderBy(a => a.Name).ToList();
+                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseName).ToList();
                 }
             }
             if (Request.IsAjaxRequest())

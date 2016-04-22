@@ -28,7 +28,7 @@ namespace UniversityApplication.DAL
                 string code = reader["code"].ToString();
                 Department aDepartment = new Department();
 
-                aDepartment.Name = Name;
+                aDepartment.DepartmentName = Name;
                 aDepartment.Code = code;
 
                 departmentList.Add(aDepartment);

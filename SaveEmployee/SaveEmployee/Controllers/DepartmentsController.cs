@@ -33,7 +33,7 @@ namespace UniversityApplication.Controllers
         
         public JsonResult IsDepartmentNameExists(string name)
         {
-            return Json(!db.Departments.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
+            return Json(!db.Departments.Any(x => x.DepartmentName == name), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]

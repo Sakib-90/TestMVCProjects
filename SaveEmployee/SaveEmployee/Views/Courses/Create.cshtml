@@ -52,9 +52,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseDepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Department, new SelectList(ViewBag.Departments, "Value","Text"),"Select Department", new { @class = "form-control"})
+                @Html.DropDownListFor(model => model.CourseDepartmentCode, new SelectList(ViewBag.Departments, "Value","Text"),"Select Department", new { @class = "form-control"})
             </div>
         </div>
 
@@ -68,12 +68,12 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2-Save col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @if (ViewBag.Status == "Success")
                 {
@@ -84,7 +84,7 @@
                     <p class="text-danger"> @ViewBag.Message</p>
                 }
             </div>
-        </div>*@
+        </div>
     </div>
 }
 

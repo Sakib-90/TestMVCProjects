@@ -29,8 +29,8 @@ namespace UniversityApplication.DAL
                 
                 Teacher aTeacher = new Teacher();
 
-                aTeacher.Name = name;
-                aTeacher.Credit = credit;
+                aTeacher.TeacherName = name;
+                aTeacher.TeacherCredit = credit;
 
                 teacherList.Add(aTeacher);
             }

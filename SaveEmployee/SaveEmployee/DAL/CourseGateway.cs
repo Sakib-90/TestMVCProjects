@@ -30,9 +30,9 @@ namespace UniversityApplication.DAL
                 
                 Course aCourse = new Course();
 
-                aCourse.Name = name;
-                aCourse.Code = code;
-                aCourse.Credit = credit;
+                aCourse.CourseName = name;
+                aCourse.CourseCode = code;
+                aCourse.CourseCredit = credit;
 
                 courseListList.Add(aCourse);
             }

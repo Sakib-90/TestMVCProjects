@@ -9,6 +9,9 @@ namespace UniversityApplication.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<CourseTeacher> CoursesTeachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<CourseStudent> CoursesStudents { get; set; }
         
     }
 }

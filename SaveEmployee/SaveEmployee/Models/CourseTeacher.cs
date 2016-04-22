@@ -8,19 +8,18 @@ namespace UniversityApplication.Models
 {
     public class CourseTeacher
     {
-        public string Department { get; set; }
-        
-        public string Teacher { get; set; }
+        public string CourseTeacherDepartmentCode { get; set; }
+        public string CourseTeacherEmail { get; set; }
         [DisplayName("Credit to be taken")]
-        public double CreditToTake { get; set; }
+        public double CourseTeacherCreditToTake { get; set; }
         [DisplayName("Remaining Credit")]
-        public double RemainingCredit { get; set; }
-        [DisplayName("Course Code")]
-        public string CourseCode { get; set; }
+        public double CourseTeacherRemainingCredit { get; set; }
+        [DisplayName("Code")]
+        public string CourseTeacherCourseCode { get; set; }
         [DisplayName("Name")]
-        public string CourseName { get; set; }
+        public string CourseTeacherCourseName { get; set; }
         [DisplayName("Credit")]
-        public double CourseCredit { get; set; }
+        public double CourseTeacherCourseCredit { get; set; }
         public int CourseTeacherID { get; set; }
     }
 }
