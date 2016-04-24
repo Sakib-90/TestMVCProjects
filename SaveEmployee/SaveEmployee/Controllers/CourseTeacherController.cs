@@ -19,7 +19,8 @@ namespace UniversityApplication.Controllers
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
 
-
+            double creditToTake = 1.0;
+            
             using (ApplicationContext db = new ApplicationContext())
             {
                 allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
@@ -28,7 +29,7 @@ namespace UniversityApplication.Controllers
             ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName");
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName");
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
-            
+            ViewBag.CreditToTake = creditToTake.ToString();
             return View();
         }
 
@@ -40,7 +41,8 @@ namespace UniversityApplication.Controllers
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
 
-            
+            double creditToTake = 2.0;
+
             using (ApplicationContext db = new ApplicationContext())
             {
                 allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
@@ -66,9 +68,15 @@ namespace UniversityApplication.Controllers
                 }
             }
 
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                creditToTake = (db.Teachers.Where(p => p.TeacherEmail == courseTeacher.CourseTeacherEmail).Select(p => p.TeacherCredit)).Single();
+            }
+
             ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName", courseTeacher.CourseTeacherDepartmentCode);
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName", courseTeacher.CourseTeacherEmail);
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode", courseTeacher.CourseTeacherCourseCode);
+            ViewBag.CreditToTake = creditToTake.ToString();
             
             if (ModelState.IsValid)
             {
@@ -113,7 +121,35 @@ namespace UniversityApplication.Controllers
             }
         }
 
-        
+        [HttpGet]
+        public JsonResult GetTeachersCreditToTake(string teacherName)
+        {
+            double creditToTake = 0.0;
+
+            if (teacherName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = creditToTake,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
 
         [HttpGet]
         public JsonResult GetCourseCode(string departmentName)

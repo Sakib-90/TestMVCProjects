@@ -7,16 +7,17 @@ namespace UniversityApplication.Models
     {
         public string CourseTeacherDepartmentCode { get; set; }
         public string CourseTeacherEmail { get; set; }
-        [DisplayName("Credit to be taken")]
+        //[DisplayName("Credit to be taken")]
         public double CourseTeacherCreditToTake { get; set; }
-        [DisplayName("Remaining Credit")]
-        public double CourseTeacherRemainingCredit { get; set; }
+        //[DisplayName("Remaining Credit")]
+        //public double CourseTeacherRemainingCredit { get; set; }
         [DisplayName("Code")]
         public string CourseTeacherCourseCode { get; set; }
-        [DisplayName("Name")]
-        public string CourseTeacherCourseName { get; set; }
-        [DisplayName("Credit")]
-        public double CourseTeacherCourseCredit { get; set; }
+        //[DisplayName("Name")]
+        //public string CourseTeacherCourseName { get; set; }
+        //[DisplayName("Credit")]
+        //public double CourseTeacherCourseCredit { get; set; }
+        
         [Key]
         public int CourseTeacherID { get; set; }
     }

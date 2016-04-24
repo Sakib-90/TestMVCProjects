@@ -34,20 +34,19 @@
             @Html.LabelFor(model => model.CourseTeacherCreditToTake, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                @Html.LabelFor(model => model.CourseTeacherCreditToTake, (string)@ViewBag.CreditToTake)
-
-                @*@Html.EditorFor(model => model.CreditToTake, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreditToTake, "", new { @class = "text-danger" })*@
-            </div>
+                <label class="sizedCustomerDataLeftLabel" id="LabelID">
+                    @Html.DisplayFor(model => model.CourseTeacherCreditToTake, (string)@ViewBag.CreditToTake)</label>
+               
+</div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherRemainingCredit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CourseTeacherRemainingCredit, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CourseTeacherRemainingCredit, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCourseCode, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -56,21 +55,21 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCourseName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CourseTeacherCourseName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CourseTeacherCourseName, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CourseTeacherCourseCredit, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CourseTeacherCourseCredit, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2-Save col-md-10">
@@ -87,12 +86,13 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script language="javascript">
-        $(document).ready(function () {
-            $("#CourseTeacherDepartmentCode").change(function () {
+    <script language="javascript">
+        $(document).ready(function() {
+
+            $("#CourseTeacherDepartmentCode").change(function() {
                 // this will call when Department Dropdown select change
                 var departmentName = $("#CourseTeacherDepartmentCode").val();
-                if (departmentName!=null) {
+                if (departmentName != null) {
 
 
                     var ddTeacher = $("#CourseTeacherEmail");
@@ -105,17 +105,18 @@
                         type: "GET",
                         data: { departmentName: departmentName },
                         dataType: "json",
-                        success: function (data) {
-                            $.each(data, function (i, val) {
+                        success: function(data) {
+                            $.each(data, function(i, val) {
                                 ddTeacher.append(
-                                        $("<option></option>").val(val.TeacherEmail).html(val.TeacherName)
-                                    );
+                                    $("<option></option>").val(val.TeacherEmail).html(val.TeacherName)
+                                );
                             });
                         },
-                        error: function () {
+                        error: function() {
                             alert("Error!");
                         }
                     });
+
 
                     var ddCourseCode = $("#CourseTeacherCourseCode");
                     ddCourseCode.empty(); // this line is for clear all items from CourseCode dropdown
@@ -125,26 +126,64 @@
                     $.ajax({
                         url: "@Url.Action("GetCourseCode", "CourseTeacher")",
                         type: "GET",
-                    data: { departmentName: departmentName },
-                    dataType: "json",
-                    success: function (data) {
-                        $.each(data, function (i, val) {
-                            ddCourseCode.append(
+                        data: { departmentName: departmentName },
+                        dataType: "json",
+                        success: function(data) {
+                            $.each(data, function(i, val) {
+                                ddCourseCode.append(
                                     $("<option></option>").val(val.CourseCode).html(val.CourseCode)
                                 );
-                        });
-                    },
-                    error: function () {
-                        alert("Error!");
-                    }
-                });
-
-
-
+                            });
+                        },
+                        error: function() {
+                            alert("Error!");
+                        }
+                    });
 
 
                 }
             });
+
+
         });
-</script>
-}
+
+    </script>
+
+    <script>
+        
+        $(document).ready(function() {
+
+            $("#CourseTeacherEmail").change(function () {
+                // this will call when Department Dropdown select change
+                var teacherName = $("#CourseTeacherEmail").val();
+                if (teacherName != null) {
+
+
+                    var ddCredit = $("#LabelID");
+                    ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                    ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                    $.ajax({
+
+                        url: "@Url.Action("GetTeachersCreditToTake", "CourseTeacher")",
+                        type: 'GET',
+                        dataType: "json",
+                        data: { teacherName: teacherName },
+                        contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#LabelID").text(data);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                        
+                });
+        }
+        });
+        });
+        
+        </script>
+
+
+        }
