@@ -23,19 +23,19 @@ namespace UniversityApplication.Controllers
             return View();
         }
 
-        public JsonResult IsCourseCodeExists(string code)
+        public JsonResult IsCourseCodeExists(string courseCode)
         {
-            return Json(!db.Courses.Any(x => x.CourseCode == code), JsonRequestBehavior.AllowGet);
+            return Json(!db.Courses.Any(x => x.CourseCode == courseCode), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult IsCourseNameExists(string name)
+        public JsonResult IsCourseNameExists(string courseName)
         {
-            return Json(!db.Courses.Any(x => x.CourseName == name), JsonRequestBehavior.AllowGet);
+            return Json(!db.Courses.Any(x => x.CourseName == courseName), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Code,Name,Credit,Description,CourseDepartmentCode,Semester")] Course course)
+        public ActionResult Create([Bind(Include = "CourseCode,CourseName,CourseCredit,CourseDescription,CourseDepartmentCode,CourseSemester")] Course course)
         {
             GenerateDropDownValue();
             
@@ -44,19 +44,19 @@ namespace UniversityApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                //try
-                //{
+                try
+                {
                     db.Courses.Add(course);
                     db.SaveChanges();
                     ViewBag.Status = "Success";
                     ViewBag.Message = "Course Saved Successfuly";
                     
-                //}
-                //catch (Exception)
-                //{
+                }
+                catch (Exception)
+                {
                     ViewBag.Status = "Error";
                     ViewBag.Message = "Course Code and Name required";
-                //}
+                }
                 ModelState.Clear();
             }
             
@@ -75,7 +75,7 @@ namespace UniversityApplication.Controllers
 
                     new SelectListItem()
                     {
-                        Value = department.Code,
+                        Value = department.DepartmentCode,
                         Text = department.DepartmentName
                     }
                     );

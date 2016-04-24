@@ -9,13 +9,13 @@ namespace UniversityApplication.Models
     public class Department
     {
         [Key]
-        [Required]
-        [Remote("IsDepartmentCodeExists", "Departments", ErrorMessage = "Department Code already in use. Please try new code")]
+        [Required(ErrorMessage = "Required")]
+        [Remote("IsCodeExists", "Departments", ErrorMessage = "Department Code is in use. Please try new code")]
         [StringLength(7, ErrorMessage = "Must be between {2} and {1} characters long.", MinimumLength = 2)]
         [DisplayName("Department Code")]
         public string DepartmentCode { get; set; }
-        [Required]
-        [Remote("IsDepartmentNameExists", "Departments", ErrorMessage = "Department Name already in use. Please try new name")]
+        [Required(ErrorMessage = "Required")]
+        [Remote("IsNameExists", "Departments", ErrorMessage = "Department Name is in use. Please try new name")]
         [DisplayName("Department Name")]
         public string DepartmentName { get; set; }
     }

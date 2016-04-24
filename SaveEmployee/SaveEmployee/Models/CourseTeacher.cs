@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniversityApplication.Models
 {
@@ -20,6 +17,7 @@ namespace UniversityApplication.Models
         public string CourseTeacherCourseName { get; set; }
         [DisplayName("Credit")]
         public double CourseTeacherCourseCredit { get; set; }
+        [Key]
         public int CourseTeacherID { get; set; }
     }
 }

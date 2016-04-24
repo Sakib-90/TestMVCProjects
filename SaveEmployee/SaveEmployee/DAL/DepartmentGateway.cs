@@ -14,7 +14,7 @@ namespace UniversityApplication.DAL
         {
             List<Department> departmentList = new List<Department>();
 
-            string query = "SELECT * FROM Departments ORDER BY Name";
+            string query = "SELECT * FROM Departments ORDER BY DepartmentName";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -24,12 +24,12 @@ namespace UniversityApplication.DAL
 
             while (reader.Read())
             {
-                string Name = reader["Name"].ToString();
-                string code = reader["code"].ToString();
+                string Name = reader["DepartmentName"].ToString();
+                string code = reader["Departmentcode"].ToString();
                 Department aDepartment = new Department();
 
                 aDepartment.DepartmentName = Name;
-                aDepartment.Code = code;
+                aDepartment.DepartmentCode = code;
 
                 departmentList.Add(aDepartment);
             }

@@ -25,18 +25,18 @@ namespace UniversityApplication.Controllers
             GenerateDropDownValue();
             return View();
         }
-        public JsonResult IsEmailExists(string email)
+        public JsonResult IsEmailExists(string teacherEmail)
         {
-            return Json(!db.Teachers.Any(x => x.TeacherEmail == email), JsonRequestBehavior.AllowGet);
+            return Json(!db.Teachers.Any(x => x.TeacherEmail == teacherEmail), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Email,Designation,Credit,Name,Contact,Address,Department")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "TeacherDesignation,TeacherCredit,TeacherEmail,TeacherName,TeacherContact,TeacherAddress,TeacherDepartmentCode")] Teacher teacher)
         {
             GenerateDropDownValue();
 
-            ViewBag.Message = "Course Not saved";
+            ViewBag.Message = "Teacher Not saved";
             ViewBag.Status = "Error";
 
             if (ModelState.IsValid)
@@ -46,13 +46,13 @@ namespace UniversityApplication.Controllers
                     db.Teachers.Add(teacher);
                     db.SaveChanges();
                     ViewBag.Status = "Success";
-                    ViewBag.Message = "Course Saved Successfuly";
+                    ViewBag.Message = "Teacher Saved Successfuly";
 
                 }
                 catch (Exception)
                 {
                     ViewBag.Status = "Error";
-                    ViewBag.Message = "Course Code and Name required";
+                    ViewBag.Message = "Teacher Email and Name required";
                 }
                 ModelState.Clear();
             }
@@ -72,7 +72,7 @@ namespace UniversityApplication.Controllers
 
                     new SelectListItem()
                     {
-                        Value = department.DepartmentName,
+                        Value = department.DepartmentCode,
                         Text = department.DepartmentName
                     }
                     );

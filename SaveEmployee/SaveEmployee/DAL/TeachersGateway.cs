@@ -14,7 +14,7 @@ namespace UniversityApplication.DAL
         {
             List<Teacher> teacherList = new List<Teacher>();
 
-            string query = "SELECT * FROM Teachers WHERE Department = '"+departmentName+"'ORDER BY Name";
+            string query = "SELECT * FROM Teachers WHERE Department = '"+departmentName+"'ORDER BY TeacherName";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -24,8 +24,8 @@ namespace UniversityApplication.DAL
 
             while (reader.Read())
             {
-                string name = reader["Name"].ToString();
-                double credit = Convert.ToDouble(reader["Credit"]);
+                string name = reader["TeacherName"].ToString();
+                double credit = Convert.ToDouble(reader["TeacherCredit"]);
                 
                 Teacher aTeacher = new Teacher();
 

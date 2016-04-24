@@ -11,6 +11,7 @@ namespace UniversityApplication.Models
         [Range(0.0, double.MaxValue,ErrorMessage = "Credit Must be a positive value")]
         public double TeacherCredit { get; set; }
         [Key]
+        [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [Remote("IsEmailExists", "Teachers", ErrorMessage = "Email already in use. Please try new email")]
         public string TeacherEmail { get; set; }

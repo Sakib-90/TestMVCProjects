@@ -25,20 +25,19 @@ namespace UniversityApplication.Controllers
 
 
         // POST: Departments/Create
+        public JsonResult IsCodeExists(string departmentCode)
+        {
+            return Json(!db.Departments.Any(x => x.DepartmentCode == departmentCode), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult IsNameExists(string departmentName)
+        {
+            return Json(!db.Departments.Any(x => x.DepartmentName == departmentName), JsonRequestBehavior.AllowGet);
+        }
 
-        public JsonResult IsDepartmentCodeExists(string code)
-        {
-            return Json(!db.Departments.Any(x => x.Code == code), JsonRequestBehavior.AllowGet);
-        }
-        
-        public JsonResult IsDepartmentNameExists(string name)
-        {
-            return Json(!db.Departments.Any(x => x.DepartmentName == name), JsonRequestBehavior.AllowGet);
-        }
-        
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Code,Name")] Department department)
+        public ActionResult Create([Bind(Include = "DepartmentCode,DepartmentName")] Department department)
         {
             ViewBag.Message = "Department Not saved";
             ViewBag.Status = "Error";

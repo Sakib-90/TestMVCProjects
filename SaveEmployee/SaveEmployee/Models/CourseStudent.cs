@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,5 +14,7 @@ namespace UniversityApplication.Models
         public string CourseStudentDepartmentCode { get; set; }
         public string CourseStudentCourse { get; set; }
         public DateTime CourseStudentRegDate { get; set; }
+        [Key]
+        public int CourseStudentID { get; set; }
     }
 }

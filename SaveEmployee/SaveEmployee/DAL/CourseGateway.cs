@@ -14,7 +14,7 @@ namespace UniversityApplication.DAL
         {
             List<Course> courseListList = new List<Course>();
 
-            string query = "SELECT * FROM Courses ORDER BY Name";
+            string query = "SELECT * FROM Courses ORDER BY CourseName";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -24,9 +24,9 @@ namespace UniversityApplication.DAL
 
             while (reader.Read())
             {
-                string name = reader["Name"].ToString();
-                string code = reader["code"].ToString();
-                double credit = Convert.ToDouble(reader["credit"]);
+                string name = reader["CourseName"].ToString();
+                string code = reader["Coursecode"].ToString();
+                double credit = Convert.ToDouble(reader["Coursecredit"]);
                 
                 Course aCourse = new Course();
 
