@@ -60,21 +60,25 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CourseTeacherCourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseTeacherCourseName, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseTeacherCourseName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CourseTeacherCourseName, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CourseTeacherCourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseTeacherCourseCredit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CourseTeacherCourseCredit, "", new { @class = "text-danger" })
+                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseName">
+                    @Html.DisplayFor(model => model.CourseTeacherCourseName, (string)@ViewBag.RemainingCredit)
+                </label>
             </div>
-        </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseTeacherCourseCredit, @htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseCredit">
+                    @Html.DisplayFor(model => model.CourseTeacherCourseCredit, (string)@ViewBag.RemainingCredit)
+                </label>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2-Save col-md-10">
@@ -190,9 +194,7 @@
         
         </script>
 
-
-
-
+    
 <script>
 
     $(document).ready(function () {
@@ -229,6 +231,75 @@
 
 </script>
 
+    <script>
 
+        $(document).ready(function() {
+
+            $("#CourseTeacherCourseCode").change(function() {
+                // this will call when Department Dropdown select change
+                var teacherName = $("#CourseTeacherCourseCode").val();
+                if (teacherName != null) {
+
+
+                    var ddCredit = $("#CourseTeacherCourseName");
+                    ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                    // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                    $.ajax({
+                        url: "@Url.Action("GetCourseName", "CourseTeacher")",
+                        type: 'GET',
+                        dataType: "json",
+                        data: { teacherName: teacherName },
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(data) {
+                            $("#CourseTeacherCourseName").text(data);
+                        },
+                        error: function() {
+                            alert("error");
+                        }
+
+                    });
+                }
+            });
+        });
+
+    </script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#CourseTeacherCourseCode").change(function () {
+            // this will call when Department Dropdown select change
+            var teacherName = $("#CourseTeacherCourseCode").val();
+            if (teacherName != null) {
+
+
+                var ddCredit = $("#CourseTeacherCourseCredit");
+                ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                $.ajax({
+
+                    url: "@Url.Action("GetCourseCredit", "CourseTeacher")",
+                    type: 'GET',
+                    dataType: "json",
+                    data: { teacherName: teacherName },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#CourseTeacherCourseCredit").text(data);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+            }
+        });
+    });
+
+</script>
 
 }

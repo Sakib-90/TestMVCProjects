@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using UniversityApplication.BLL;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
@@ -216,6 +217,67 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
+
+        public JsonResult GetCourseName(string teacherName)
+        {
+            string course="";
+
+            if (teacherName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    //creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                    course = db.Courses.Where(c => c.CourseCode == teacherName).Select(p => p.CourseName).Single();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = course,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+        public JsonResult GetCourseCredit(string teacherName)
+        {
+            double credit = 0.0;
+
+            if (teacherName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    //creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                    credit = db.Courses.Where(c => c.CourseCode == teacherName).Select(p => p.CourseCredit).Single();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = credit,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
         
     }
 }
