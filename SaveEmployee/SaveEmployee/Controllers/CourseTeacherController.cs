@@ -152,6 +152,36 @@ namespace UniversityApplication.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetTeachersRemainingCredit(string teacherName)
+        {
+            double remainingCredit = 0.0;
+
+            if (teacherName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    remainingCredit = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = remainingCredit,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+        [HttpGet]
         public JsonResult GetCourseCode(string departmentName)
         {
             List<Course> allCourses = new List<Course>();
