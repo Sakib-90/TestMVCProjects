@@ -19,8 +19,9 @@ namespace UniversityApplication.Controllers
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
 
-            double creditToTake = 1.0;
-            
+            double creditToTake = 0.0;
+            double remainingCredit = 0.0;
+
             using (ApplicationContext db = new ApplicationContext())
             {
                 allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
@@ -30,6 +31,7 @@ namespace UniversityApplication.Controllers
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName");
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
             ViewBag.CreditToTake = creditToTake.ToString();
+            ViewBag.RemainingCredit = remainingCredit.ToString();
             return View();
         }
 
@@ -41,7 +43,8 @@ namespace UniversityApplication.Controllers
             List<Teacher> allTeachers = new List<Teacher>();
             List<Course> allCourses = new List<Course>();
 
-            double creditToTake = 2.0;
+            double creditToTake = 0.0;
+            double remainingCredit = 0.0;
 
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -77,6 +80,7 @@ namespace UniversityApplication.Controllers
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName", courseTeacher.CourseTeacherEmail);
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode", courseTeacher.CourseTeacherCourseCode);
             ViewBag.CreditToTake = creditToTake.ToString();
+            ViewBag.RemainingCredit = remainingCredit.ToString();
             
             if (ModelState.IsValid)
             {
@@ -155,19 +159,21 @@ namespace UniversityApplication.Controllers
         public JsonResult GetTeachersRemainingCredit(string teacherName)
         {
             double remainingCredit = 0.0;
+            double creditToTake = 0.0;
 
             if (teacherName != null)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    remainingCredit = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                    creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
+                    remainingCredit = db.CoursesTeachers.Where(p=>p.CourseTeacherEmail==teacherName).Sum(e => e.CourseTeacherCourseCredit);
                 }
             }
             if (Request.IsAjaxRequest())
             {
                 return new JsonResult
                 {
-                    Data = remainingCredit,
+                    Data = creditToTake-remainingCredit,
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
