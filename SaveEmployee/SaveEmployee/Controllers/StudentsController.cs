@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using UniversityApplication.BLL;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
@@ -39,6 +41,12 @@ namespace SaveEmployee.Controllers
             {
                 try
                 {
+                    var year = student.StudeRegDate.Year;
+
+                    string combineDepartmentYear = student.StudentDepartmentCode + "-" +
+                                                   student.StudeRegDate.Year.ToString() + "-";
+                    student.StudentRegNo = combineDepartmentYear + GetSerial(combineDepartmentYear); //ConstructorNeedsTagAttribute to change here
+                    //GetSerial(student.StudentDepartmentCode, student.StudeRegDate.Year.ToString());
                     db.Students.Add(student);
                     db.SaveChanges();
                     ViewBag.Status = "Success";
@@ -54,6 +62,35 @@ namespace SaveEmployee.Controllers
             }
 
             return View();
+        }
+
+        private string GetSerial(string combineDepartmentYear)
+        {
+            string maxId = db.Students.Where(p => p.StudentRegNo.Contains(combineDepartmentYear)).Select(i => i.StudentRegNo).Max();
+            string finalSerial;
+
+            if (maxId == null)
+            {
+                return finalSerial = "001";
+            }
+            
+            int serial = Convert.ToInt32(maxId.Substring(maxId.LastIndexOf("-") + 1)) + 1;
+
+            
+            if (serial < 10)
+            {
+                finalSerial = "00" + serial.ToString();
+            }
+            else if (serial >= 10 && serial < 100)
+            {
+                finalSerial = "0" + serial.ToString();
+            }
+            else
+            {
+                finalSerial = serial.ToString();
+            }
+
+            return finalSerial;
         }
 
 
