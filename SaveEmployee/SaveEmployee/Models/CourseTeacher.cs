@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace UniversityApplication.Models
 {
@@ -14,14 +15,15 @@ namespace UniversityApplication.Models
         public double CourseTeacherCreditToTake { get; set; }
         [DisplayName("Remaining Credit")]
         [NotMapped]
-        public double CourseTeacherRemainingCredit { get; set; }
+        public double? CourseTeacherRemainingCredit { get; set; }
         [DisplayName("Code")]
+        [Remote("IsCodeExists", "CourseTeacher", ErrorMessage = "Course already assigned")]
         public string CourseTeacherCourseCode { get; set; }
         [DisplayName("Name")]
         [NotMapped]
         public string CourseTeacherCourseName { get; set; }
         [DisplayName("Credit")]
-        public double CourseTeacherCourseCredit { get; set; }
+        public double? CourseTeacherCourseCredit { get; set; }
         
         [Key]
         public int CourseTeacherID { get; set; }

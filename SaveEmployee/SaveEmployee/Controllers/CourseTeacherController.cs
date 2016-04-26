@@ -12,6 +12,7 @@ namespace UniversityApplication.Controllers
 {
     public class CourseTeacherController : Controller
     {
+        private ApplicationContext db = new ApplicationContext();
         
         // GET: CourseTeacher
         public ActionResult AssignCourse()
@@ -23,6 +24,7 @@ namespace UniversityApplication.Controllers
             double creditToTake = 0.0;
             double remainingCredit = 0.0;
 
+
             using (ApplicationContext db = new ApplicationContext())
             {
                 allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
@@ -31,8 +33,10 @@ namespace UniversityApplication.Controllers
             ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName");
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName");
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
+
             ViewBag.CreditToTake = creditToTake.ToString();
             ViewBag.RemainingCredit = remainingCredit.ToString();
+            
             return View();
         }
 
@@ -80,6 +84,7 @@ namespace UniversityApplication.Controllers
             ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName", courseTeacher.CourseTeacherDepartmentCode);
             ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName", courseTeacher.CourseTeacherEmail);
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode", courseTeacher.CourseTeacherCourseCode);
+
             ViewBag.CreditToTake = creditToTake.ToString();
             ViewBag.RemainingCredit = remainingCredit.ToString();
             
@@ -87,6 +92,9 @@ namespace UniversityApplication.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
+                    courseTeacher.CourseTeacherCourseCredit = db.Courses.Where(c => c.CourseCode == courseTeacher.CourseTeacherCourseCode).Select(p => (double?)p.CourseCredit).Single();
+                    
+                    
                     db.CoursesTeachers.Add(courseTeacher);
                     db.SaveChanges();
                     ModelState.Clear();
@@ -96,6 +104,10 @@ namespace UniversityApplication.Controllers
             return View(courseTeacher);
         }
 
+        public JsonResult IsCodeExists(string courseTeacherCourseCode)
+        {
+            return Json(!db.CoursesTeachers.Any(x => x.CourseTeacherCourseCode == courseTeacherCourseCode), JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public JsonResult GetTeachers(string departmentName)
         {
@@ -159,22 +171,31 @@ namespace UniversityApplication.Controllers
         [HttpGet]
         public JsonResult GetTeachersRemainingCredit(string teacherName)
         {
-            double remainingCredit = 0.0;
-            double creditToTake = 0.0;
+            double? totalCredit = 0.0;
+            double? creditToTake = 0.0;
 
             if (teacherName != null)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
-                    remainingCredit = db.CoursesTeachers.Where(p=>p.CourseTeacherEmail==teacherName).Sum(e => e.CourseTeacherCourseCredit);
+                    creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => (double?)p.TeacherCredit)).Single();
+                    double? credit = db.CoursesTeachers.Where(p=>p.CourseTeacherEmail==teacherName).Sum(e =>(double?) e.CourseTeacherCourseCredit);
+                    if (credit == null)
+                    {
+                        totalCredit = 0.0;
+                    }
+                    else
+                    {
+                        totalCredit = credit;
+                    }
+                    
                 }
             }
             if (Request.IsAjaxRequest())
             {
                 return new JsonResult
                 {
-                    Data = creditToTake-remainingCredit,
+                    Data = creditToTake-totalCredit,
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
@@ -197,7 +218,7 @@ namespace UniversityApplication.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseName).ToList();
+                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseCode).ToList();
                 }
             }
             if (Request.IsAjaxRequest())
@@ -217,7 +238,7 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
-
+        [HttpGet]
         public JsonResult GetCourseName(string teacherName)
         {
             string course="";
@@ -247,17 +268,16 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
-
+        [HttpGet]
         public JsonResult GetCourseCredit(string teacherName)
         {
-            double credit = 0.0;
+            double? credit = 0.0;
 
             if (teacherName != null)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    //creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
-                    credit = db.Courses.Where(c => c.CourseCode == teacherName).Select(p => p.CourseCredit).Single();
+                    credit = db.Courses.Where(c => c.CourseCode == teacherName).Select(p =>(double?) p.CourseCredit).Single();
                 }
             }
             if (Request.IsAjaxRequest())

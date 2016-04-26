@@ -19,7 +19,7 @@ namespace UniversityApplication.Models
         [Required]
         [Range(0.5, 5, ErrorMessage = "Credits must be between 0.5 to 5.0")]
         [DisplayName("Course Credits")]
-        public double CourseCredit { get; set; }
+        public double? CourseCredit { get; set; }
         [DataType(DataType.MultilineText)]
         public string CourseDescription { get; set; }
         [DisplayName("Department")]
