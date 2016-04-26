@@ -129,6 +129,7 @@
     <Compile Include="Controllers\CourseTeacherController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DAL\CourseGateway.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
     <Content Include="Views\CourseTeacher\AssignCourse.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

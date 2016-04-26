@@ -248,7 +248,6 @@ namespace UniversityApplication.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    //creditToTake = (db.Teachers.Where(p => p.TeacherEmail == teacherName).Select(p => p.TeacherCredit)).Single();
                     course = db.Courses.Where(c => c.CourseCode == teacherName).Select(p => p.CourseName).Single();
                 }
             }
