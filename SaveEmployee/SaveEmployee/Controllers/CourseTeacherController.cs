@@ -40,6 +40,7 @@ namespace UniversityApplication.Controllers
             return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignCourse(CourseTeacher courseTeacher)
@@ -243,7 +244,7 @@ namespace UniversityApplication.Controllers
         {
             string course="";
 
-            if (teacherName != null)
+            if (!string.IsNullOrEmpty(teacherName))
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -273,7 +274,7 @@ namespace UniversityApplication.Controllers
         {
             double? credit = 0.0;
 
-            if (teacherName != null)
+            if (!string.IsNullOrEmpty(teacherName))
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
