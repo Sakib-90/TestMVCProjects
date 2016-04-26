@@ -52,6 +52,8 @@
             @Html.LabelFor(model => model.ClassRoomStartsAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ClassRoomStartsAt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.RadioButtonFor(model => model.ClassRoomStartsAt, "AM")AM
+                @Html.RadioButtonFor(model => model.ClassRoomStartsAt, "PM")PM
                 @Html.ValidationMessageFor(model => model.ClassRoomStartsAt, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,6 +62,8 @@
             @Html.LabelFor(model => model.ClassRoomEndssAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ClassRoomEndssAt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.RadioButtonFor(model => model.ClassRoomEndssAt, "AM")AM
+                @Html.RadioButtonFor(model => model.ClassRoomEndssAt, "PM")PM
                 @Html.ValidationMessageFor(model => model.ClassRoomEndssAt, "", new { @class = "text-danger" })
             </div>
         </div>

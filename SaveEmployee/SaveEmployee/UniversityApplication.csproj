@@ -128,6 +128,7 @@
     <Compile Include="Context\ApplicationContext.cs" />
     <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\CourseStudentsController.cs" />
     <Compile Include="Controllers\CourseTeacherController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,6 +237,7 @@
     <Content Include="Views\CourseTeacher\AssignCourse.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Classrooms\AllocateClassRoom.cshtml" />
+    <Content Include="Views\CourseStudents\StudentToCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
