@@ -16,6 +16,7 @@ namespace UniversityApplication.Models
         [DisplayName("Address")]
         [DataType(DataType.MultilineText)]
         public string StudentAddress { get; set; }
+        [DisplayName("Department")]
         public string StudentDepartmentCode { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
