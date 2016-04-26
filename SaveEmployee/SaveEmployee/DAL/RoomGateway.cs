@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using UniversityApplication.Models;
 
-namespace UniversityApplication.DAL
+namespace SaveEmployee.DAL
 {
-    public class SemesterGateway
+    public class RoomGateway
     {
         SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
-        public List<string> GetSemester()
+        public List<string> GetRooms()
         {
-            List<string> semesterList = new List<string>();
+            List<string> roomList = new List<string>();
 
-            string query = "SELECT * FROM Semester";
+            string query = "SELECT * FROM Rooms";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -25,14 +23,14 @@ namespace UniversityApplication.DAL
 
             while (reader.Read())
             {
-                string semester = reader["Semester"].ToString();
-                
-                semesterList.Add(semester);
+                string room = reader["RoomNo"].ToString();
+
+                roomList.Add(room);
             }
 
             connection.Close();
 
-            return semesterList;
+            return roomList;
         }
     }
 }

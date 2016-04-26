@@ -122,9 +122,11 @@
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
     <Compile Include="BLL\DesignationManager.cs" />
+    <Compile Include="BLL\RoomManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="BLL\TeacherManager.cs" />
     <Compile Include="Context\ApplicationContext.cs" />
+    <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\CourseTeacherController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="DAL\CourseGateway.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
     <Compile Include="DAL\DesignationGateway.cs" />
+    <Compile Include="DAL\RoomGateway.cs" />
     <Compile Include="DAL\SemesterGateway.cs" />
     <Compile Include="DAL\TeachersGateway.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +235,7 @@
     <Content Include="Views\Teachers\Create.cshtml" />
     <Content Include="Views\CourseTeacher\AssignCourse.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Classrooms\AllocateClassRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

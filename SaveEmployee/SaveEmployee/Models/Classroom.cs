@@ -12,7 +12,7 @@ namespace UniversityApplication.Models
         [DisplayName("Department")]
         public string ClassRoomDepartmentCode { get; set; }
         [DisplayName("Course")]
-        public string ClassRoomCourseID { get; set; }
+        public string ClassRoomCourseCode { get; set; }
         [Key]
         [DisplayName("Room No")]
         public string ClassRoomRoomNo { get; set; }
