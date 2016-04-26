@@ -81,24 +81,6 @@ namespace SaveEmployee.Controllers
             }
 
             ViewBag.Departments = departmentList;
-
-            //var designations = designationManager.GetDesignation();
-
-            //List<SelectListItem> designationList = new List<SelectListItem>();
-
-            //foreach (var designation in designations)
-            //{
-            //    designationList.Add(
-
-            //        new SelectListItem()
-            //        {
-            //            Value = designation,
-            //            Text = designation
-            //        }
-            //        );
-            //}
-
-            //ViewBag.Designations = designationList;
         }
         protected override void Dispose(bool disposing)
         {

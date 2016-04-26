@@ -25,6 +25,7 @@ namespace UniversityApplication.Models
         public string StudentEmail { get; set; }
         [DataType(DataType.Date)]
         [DisplayName("Date")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
         public DateTime StudeRegDate { get; set; }
     }
 }
