@@ -146,9 +146,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604251129579_Version1.cs" />
-    <Compile Include="Migrations\201604251129579_Version1.Designer.cs">
-      <DependentUpon>201604251129579_Version1.cs</DependentUpon>
+    <Compile Include="Migrations\201604290451031_droppedManyColumns.cs" />
+    <Compile Include="Migrations\201604290451031_droppedManyColumns.Designer.cs">
+      <DependentUpon>201604290451031_droppedManyColumns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classroom.cs" />
@@ -255,8 +255,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604251129579_Version1.resx">
-      <DependentUpon>201604251129579_Version1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604290451031_droppedManyColumns.resx">
+      <DependentUpon>201604290451031_droppedManyColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

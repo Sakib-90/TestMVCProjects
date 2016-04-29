@@ -7,13 +7,13 @@ namespace UniversityApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Version1 : IMigrationMetadata
+    public sealed partial class droppedManyColumns : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Version1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(droppedManyColumns));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604251129579_Version1"; }
+            get { return "201604290451031_droppedManyColumns"; }
         }
         
         string IMigrationMetadata.Source

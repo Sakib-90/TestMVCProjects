@@ -10,20 +10,22 @@ namespace UniversityApplication.Models
         [Required]
         [Remote("IsCourseCodeExists", "Courses", ErrorMessage = "Course Code already in use. Please try new code")]
         [StringLength(50, ErrorMessage = "Must be at minimum 5 characters long.", MinimumLength = 5)]
-        [DisplayName("Course Code")]
+        [DisplayName("Code")]
         public string CourseCode { get; set; }
         [Required]
         [Remote("IsCourseNameExists", "Courses", ErrorMessage = "Course Name already in use. Please try new Name")]
-        [DisplayName("Course Name")]
+        [DisplayName("Name")]
         public string CourseName { get; set; }
         [Required]
         [Range(0.5, 5, ErrorMessage = "Credits must be between 0.5 to 5.0")]
-        [DisplayName("Course Credits")]
+        [DisplayName("Credits")]
         public double? CourseCredit { get; set; }
         [DataType(DataType.MultilineText)]
+        [DisplayName("Description")]
         public string CourseDescription { get; set; }
         [DisplayName("Department")]
         public string CourseDepartmentCode { get; set; }
+        [DisplayName("Semester")]
         public string CourseSemester { get; set; }
     }
 }

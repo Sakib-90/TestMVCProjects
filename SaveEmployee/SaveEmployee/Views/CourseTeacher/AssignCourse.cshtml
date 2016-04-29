@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCreditToTake, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-
+                @*@Html.LabelFor(model => model.CourseTeacherCreditToTake, htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCreditToTake">
                     @Html.DisplayFor(model => model.CourseTeacherCreditToTake)
                 </label>
@@ -113,6 +113,7 @@
 
                     // Here I will call Controller Action via Jquery to load Teacher for selected Department
                     $.ajax({
+
                         url: "@Url.Action("GetTeachers", "CourseTeacher")",
                         type: "GET",
                         data: { departmentName: departmentName },
@@ -177,7 +178,7 @@
 
                     // Here I will call Controller Action via Jquery to load Teacher for selected Department
                     $.ajax({
-
+                        context: this,
                         url: "@Url.Action("GetTeachersCreditToTake", "CourseTeacher")",
                         type: 'GET',
                         dataType: "json",

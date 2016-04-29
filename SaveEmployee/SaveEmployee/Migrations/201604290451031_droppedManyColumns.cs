@@ -3,7 +3,7 @@ namespace UniversityApplication.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Version1 : DbMigration
+    public partial class droppedManyColumns : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace UniversityApplication.Migrations
                     {
                         ClassRoomRoomNo = c.String(nullable: false, maxLength: 128),
                         ClassRoomDepartmentCode = c.String(),
-                        ClassRoomCourseID = c.String(),
+                        ClassRoomCourseCode = c.String(),
                         ClassRoomWeekDay = c.String(),
                         ClassRoomStartsAt = c.Time(nullable: false, precision: 7),
                         ClassRoomEndssAt = c.Time(nullable: false, precision: 7),
@@ -39,9 +39,6 @@ namespace UniversityApplication.Migrations
                     {
                         CourseStudentID = c.Int(nullable: false, identity: true),
                         CourseStudentRegNo = c.String(),
-                        CourseStudentName = c.String(),
-                        CourseStudentEmail = c.String(),
-                        CourseStudentDepartmentCode = c.String(),
                         CourseStudentCourse = c.String(),
                         CourseStudentRegDate = c.DateTime(nullable: false),
                     })
@@ -54,8 +51,6 @@ namespace UniversityApplication.Migrations
                         CourseTeacherID = c.Int(nullable: false, identity: true),
                         CourseTeacherDepartmentCode = c.String(),
                         CourseTeacherEmail = c.String(),
-                        CourseTeacherRemainingCredit = c.Double(nullable: false),
-                        CourseTeacherCourseCode = c.String(),
                     })
                 .PrimaryKey(t => t.CourseTeacherID);
             
@@ -69,6 +64,16 @@ namespace UniversityApplication.Migrations
                 .PrimaryKey(t => t.DepartmentCode);
             
             CreateTable(
+                "dbo.StudentResults",
+                c => new
+                    {
+                        StudentResultRegNo = c.String(nullable: false, maxLength: 128),
+                        StudentResultCourse = c.String(),
+                        StudentResultGrade = c.String(),
+                    })
+                .PrimaryKey(t => t.StudentResultRegNo);
+            
+            CreateTable(
                 "dbo.Students",
                 c => new
                     {
@@ -77,7 +82,7 @@ namespace UniversityApplication.Migrations
                         StudentContact = c.String(),
                         StudentAddress = c.String(),
                         StudentDepartmentCode = c.String(),
-                        StudentEmail = c.String(),
+                        StudentEmail = c.String(nullable: false),
                         StudeRegDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.StudentRegNo);
@@ -102,6 +107,7 @@ namespace UniversityApplication.Migrations
         {
             DropTable("dbo.Teachers");
             DropTable("dbo.Students");
+            DropTable("dbo.StudentResults");
             DropTable("dbo.Departments");
             DropTable("dbo.CourseTeachers");
             DropTable("dbo.CourseStudents");

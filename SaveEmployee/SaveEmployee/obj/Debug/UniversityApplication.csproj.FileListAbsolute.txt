@@ -28,5 +28,5 @@ F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\bin\Newtonsoft.Json.xml
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\SaveEmployee.dll
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\SaveEmployee.pdb
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.csprojResolveAssemblyReference.cache
-F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.Version1.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.droppedManyColumns.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.csproj.GenerateResource.Cache
