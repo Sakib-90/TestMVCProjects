@@ -12,6 +12,8 @@ namespace UniversityApplication.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<CourseStudent> CoursesStudents { get; set; }
+
+        public System.Data.Entity.DbSet<UniversityApplication.Models.StudentResult> StudentResults { get; set; }
         
     }
 }

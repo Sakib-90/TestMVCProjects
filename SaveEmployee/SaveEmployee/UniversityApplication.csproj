@@ -122,6 +122,7 @@
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
     <Compile Include="BLL\DesignationManager.cs" />
+    <Compile Include="BLL\ResultManager.cs" />
     <Compile Include="BLL\RoomManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="BLL\TeacherManager.cs" />
@@ -132,11 +133,13 @@
     <Compile Include="Controllers\CourseTeacherController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentResultsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DAL\CourseGateway.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
     <Compile Include="DAL\DesignationGateway.cs" />
+    <Compile Include="DAL\ResultGateway.cs" />
     <Compile Include="DAL\RoomGateway.cs" />
     <Compile Include="DAL\SemesterGateway.cs" />
     <Compile Include="DAL\TeachersGateway.cs" />
@@ -238,6 +241,8 @@
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Classrooms\AllocateClassRoom.cshtml" />
     <Content Include="Views\CourseStudents\StudentToCourse.cshtml" />
+    <Content Include="Views\StudentResults\Create.cshtml" />
+    <Content Include="Views\StudentResults\SaveResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
