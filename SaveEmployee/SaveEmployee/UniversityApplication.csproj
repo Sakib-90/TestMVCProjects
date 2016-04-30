@@ -137,6 +137,7 @@
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DAL\CourseGateway.cs" />
+    <Compile Include="DAL\DatabaseConnection.cs" />
     <Compile Include="DAL\DepartmentGateway.cs" />
     <Compile Include="DAL\DesignationGateway.cs" />
     <Compile Include="DAL\ResultGateway.cs" />

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class DepartmentGateway
+    public class DepartmentGateway : DatabaseConnection
     {
-        SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
+        //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<Department> GetDepartments()
         {
+            SqlConnection connection = new SqlConnection(Connection);
+            
             List<Department> departmentList = new List<Department>();
 
             string query = "SELECT * FROM Departments ORDER BY DepartmentName";

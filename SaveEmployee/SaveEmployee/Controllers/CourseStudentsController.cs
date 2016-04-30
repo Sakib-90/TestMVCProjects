@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
 
-namespace SaveEmployee.Controllers
+namespace UniversityApplication.Controllers
 {
     public class CourseStudentsController : Controller
     {

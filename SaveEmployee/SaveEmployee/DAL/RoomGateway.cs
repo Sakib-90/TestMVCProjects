@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
-namespace SaveEmployee.DAL
+namespace UniversityApplication.DAL
 {
-    public class RoomGateway
+    public class RoomGateway : DatabaseConnection
     {
-        SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
+        //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<string> GetRooms()
         {
+            SqlConnection connection = new SqlConnection(Connection);
+
             List<string> roomList = new List<string>();
 
             string query = "SELECT * FROM Rooms";

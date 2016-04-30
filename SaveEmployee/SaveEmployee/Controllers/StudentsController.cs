@@ -12,7 +12,7 @@ using UniversityApplication.BLL;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
 
-namespace SaveEmployee.Controllers
+namespace UniversityApplication.Controllers
 {
     public class StudentsController : Controller
     {

@@ -3,11 +3,13 @@ using System.Data.SqlClient;
 
 namespace UniversityApplication.DAL
 {
-    public class DesignationGateway
+    public class DesignationGateway : DatabaseConnection
     {
-        SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
+        //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<string> GetDesignation()
         {
+            SqlConnection connection = new SqlConnection(Connection);
+
             List<string> designationList = new List<string>();
 
             string query = "SELECT * FROM Designations";

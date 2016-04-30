@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class CourseGateway
+    public class CourseGateway : DatabaseConnection
     {
-        SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
+        
         public List<Course> GetCourses()
         {
+            SqlConnection connection = new SqlConnection(Connection);    
+            
             List<Course> courseListList = new List<Course>();
 
             string query = "SELECT * FROM Courses ORDER BY CourseName";
