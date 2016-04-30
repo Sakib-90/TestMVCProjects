@@ -4,12 +4,13 @@ using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class DepartmentGateway : DatabaseConnection
+    public class DepartmentGateway 
     {
         //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<Department> GetDepartments()
         {
-            SqlConnection connection = new SqlConnection(Connection);
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
             
             List<Department> departmentList = new List<Department>();
 

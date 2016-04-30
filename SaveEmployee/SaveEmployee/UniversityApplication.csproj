@@ -234,7 +234,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Departments\Create.cshtml" />
     <Content Include="Views\Departments\ShowAllDepartments.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
@@ -242,7 +241,6 @@
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Classrooms\AllocateClassRoom.cshtml" />
     <Content Include="Views\CourseStudents\StudentToCourse.cshtml" />
-    <Content Include="Views\StudentResults\Create.cshtml" />
     <Content Include="Views\StudentResults\SaveResult.cshtml" />
   </ItemGroup>
   <ItemGroup>

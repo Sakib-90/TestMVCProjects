@@ -5,12 +5,13 @@ using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class CourseGateway : DatabaseConnection
+    public class CourseGateway 
     {
         
         public List<Course> GetCourses()
         {
-            SqlConnection connection = new SqlConnection(Connection);    
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
             
             List<Course> courseListList = new List<Course>();
 

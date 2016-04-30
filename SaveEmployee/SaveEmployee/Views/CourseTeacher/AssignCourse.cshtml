@@ -33,10 +33,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCreditToTake, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.LabelFor(model => model.CourseTeacherCreditToTake, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCreditToTake">
+                @Html.LabelFor(model => model.CourseTeacherCreditToTake, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherCreditToTake" })
+                @*<label class="sizedCustomerDataLeftLabel" id="CourseTeacherCreditToTake">
                     @Html.DisplayFor(model => model.CourseTeacherCreditToTake)
-                </label>
+                </label>*@
                
             </div>
         </div>
@@ -44,10 +44,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherRemainingCredit, @htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-
-                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherRemainingCredit">
+                @Html.LabelFor(model => model.CourseTeacherRemainingCredit, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherRemainingCredit" })
+                @*<label class="sizedCustomerDataLeftLabel" id="CourseTeacherRemainingCredit">
                     @Html.DisplayFor(model => model.CourseTeacherRemainingCredit)
-                </label>
+                </label>*@
 
 
             </div>
@@ -64,22 +64,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCourseName, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-
-                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseName">
+                @Html.LabelFor(model => model.CourseTeacherCourseName, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherCourseName" })
+                @*<label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseName">
                     @Html.DisplayFor(model => model.CourseTeacherCourseName)
-                </label>
+                </label>*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherCourseCredit, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
-                <label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseCredit">
+                @Html.LabelFor(model => model.CourseTeacherCourseCredit, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherCourseCredit" })
+                @*<label class="sizedCustomerDataLeftLabel" id="CourseTeacherCourseCredit">
                     @Html.DisplayFor(model => model.CourseTeacherCourseCredit)
                     @Html.HiddenFor(model => model.CourseTeacherCourseCredit)
                     
-                </label>
+                </label>*@
             </div>
         </div>
 
@@ -215,7 +215,7 @@
 
                 // Here I will call Controller Action via Jquery to load Teacher for selected Department
                 $.ajax({
-
+                    context: this,
                     url: "@Url.Action("GetTeachersRemainingCredit", "CourseTeacher")",
                     type: 'GET',
                     dataType: "json",
@@ -251,6 +251,7 @@
 
                     // Here I will call Controller Action via Jquery to load Teacher for selected Department
                     $.ajax({
+                        context: this,
                         url: "@Url.Action("GetCourseName", "CourseTeacher")",
                         type: 'GET',
                         dataType: "json",

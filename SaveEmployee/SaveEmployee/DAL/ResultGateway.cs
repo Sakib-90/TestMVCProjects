@@ -3,14 +3,16 @@ using System.Data.SqlClient;
 
 namespace UniversityApplication.DAL
 {
-    public class ResultGateway : DatabaseConnection
+    public class ResultGateway 
     {
         //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
+        
         public List<string> GetResults()
         {
-            SqlConnection connection = new SqlConnection(Connection);
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
 
-            List<string> resultListList = new List<string>();
+            List<string> resultList = new List<string>();
 
             string query = "SELECT * FROM Results";
 
@@ -24,12 +26,12 @@ namespace UniversityApplication.DAL
             {
                 string result = reader["Grade"].ToString();
 
-                resultListList.Add(result);
+                resultList.Add(result);
             }
 
             connection.Close();
 
-            return resultListList;
+            return resultList;
         }
     }
 }

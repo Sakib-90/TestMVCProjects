@@ -7,12 +7,13 @@ using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class TeachersGateway : DatabaseConnection
+    public class TeachersGateway 
     {
        // SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<Teacher> GetTeachers(string departmentName)
         {
-            SqlConnection connection = new SqlConnection(Connection);
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
 
             List<Teacher> teacherList = new List<Teacher>();
 

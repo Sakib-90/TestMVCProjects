@@ -8,12 +8,13 @@ using UniversityApplication.Models;
 
 namespace UniversityApplication.DAL
 {
-    public class SemesterGateway : DatabaseConnection
+    public class SemesterGateway 
     {
         //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<string> GetSemester()
         {
-            SqlConnection connection = new SqlConnection(Connection);
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
 
             List<string> semesterList = new List<string>();
 

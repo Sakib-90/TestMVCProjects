@@ -3,12 +3,13 @@ using System.Data.SqlClient;
 
 namespace UniversityApplication.DAL
 {
-    public class RoomGateway : DatabaseConnection
+    public class RoomGateway
     {
         //SqlConnection connection = new SqlConnection(@"Server=.\SQLEXPRESS2; Database = UniversityApplicationDatabase; Integrated Security=true;");
         public List<string> GetRooms()
         {
-            SqlConnection connection = new SqlConnection(Connection);
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            SqlConnection connection = new SqlConnection(dbConnection.connection);
 
             List<string> roomList = new List<string>();
 
