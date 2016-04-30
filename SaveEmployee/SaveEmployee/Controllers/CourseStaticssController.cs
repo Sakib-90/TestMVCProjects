@@ -22,5 +22,63 @@ namespace UniversityApplication.Controllers
 
             return View();
         }
+
+
+        public JsonResult GetCourseCode(string departmentName)
+        {
+            List<Course> allCourses = new List<Course>();
+
+            if (departmentName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseCode).ToList();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = allCourses,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+        public JsonResult GetCourseName(string departmentName)
+        {
+            string course = "";
+
+            if (!string.IsNullOrEmpty(departmentName))
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    course = db.Courses.Where(c => c.CourseCode == departmentName).Select(p => p.CourseName).Single();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = course,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
     }
 }

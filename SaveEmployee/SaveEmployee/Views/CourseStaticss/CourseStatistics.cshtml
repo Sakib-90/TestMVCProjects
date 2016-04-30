@@ -22,27 +22,126 @@
                 @Html.DropDownListFor(model => model.CourseStaticsDepartmentCode, @ViewBag.Departments as SelectList, "Select Department", new { @class = "form-control" })
             </div>
         </div>
-        
-        <div class="form-group">
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseStaticsCourseCode, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.LabelFor(model => model.CourseStaticsCourseCode, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherCourseName" })
+                @Html.LabelFor(model => model.CourseStaticsCourseCode, htmlAttributes: new { @class = "control-label", @id = "CourseStaticsCourseCode" })
             </div>
-        </div>
-        
+        </div>*@
 
-        <div class="form-group">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseStaticsCourseCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseStaticsCourseName)
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <p id="CourseStaticsCourseCode"></p>
+
+                    @*@Html.LabelFor(model => model.CourseStaticsCourseCode, htmlAttributes: new { @class = "control-label", @id = "CourseStaticsCourseCode" })*@
+                </td>
+                <td>
+                    <p id="CourseStaticsCourseName"></p>
+                </td>
+            </tr>
+        </table>
+
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CourseStaticsCourseName, @htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.LabelFor(model => model.CourseStaticsCourseName, htmlAttributes: new { @class = "control-label", @id = "CourseTeacherCourseName" })
             </div>
-        </div>
+        </div>*@
 
         
     </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $(document).ready(function() {
+
+            $("#CourseStaticsDepartmentCode").change(function() {
+                // this will call when Department Dropdown select change
+                var departmentName = $("#CourseStaticsDepartmentCode").val();
+                if (departmentName != null) {
+
+
+                    var ddCredit = $("#CourseStaticsCourseCode");
+                    ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                    // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                    $.ajax({
+                        context: this,
+                        url: "@Url.Action("GetCourseCode", "CourseStaticss")",
+                        type: 'GET',
+                        dataType: "json",
+                        data: { departmentName: departmentName },
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(data) {
+                            $.each(data, function(i, val) {
+                                ddCredit.append(
+                                    $("<option></option>").text(val.CourseCode)
+                                );
+                            });
+
+                        },
+                        error: function() {
+                            alert("error CourseStaticsCourseCode !");
+                        }
+
+                    });
+                }
+            });
+        });
+
+    </script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#CourseStaticsDepartmentCode").change(function () {
+            // this will call when Department Dropdown select change
+            var departmentName = $("#CourseStaticsDepartmentCode").val();
+            if (departmentName != null) {
+
+
+                var ddCredit = $("#CourseStaticsCourseName");
+                ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                $.ajax({
+                    context: this,
+                    url: "@Url.Action("GetCourseName", "CourseStaticss")",
+                    type: 'GET',
+                    dataType: "json",
+                    data: { departmentName: departmentName },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#CourseStaticsCourseName").text(data);
+                    },
+                    error: function () {
+                        alert("error CourseStaticsCourseName !");
+                    }
+
+                });
+            }
+        });
+    });
+
+</script>
 
 
 
