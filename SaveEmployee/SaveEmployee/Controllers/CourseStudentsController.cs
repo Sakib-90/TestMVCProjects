@@ -70,7 +70,10 @@ namespace UniversityApplication.Controllers
             return View(courseStudent);
         }
 
-
+        public JsonResult IsCourseCodeExists(string courseCode)
+        {
+            return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == courseCode), JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetStudentName(string studentRegNo)
         {
             string name = "";

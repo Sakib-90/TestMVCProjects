@@ -20,6 +20,7 @@
             @Html.LabelFor(model => model.CourseStudentRegNo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CourseStudentRegNo, @ViewBag.Students as SelectList, "Select Student", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseStudentRegNo, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -27,6 +28,7 @@
             @Html.LabelFor(model => model.CourseStudentName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.LabelFor(model => model.CourseStudentName, new { @id = "CourseStudentName", @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.CourseStudentName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -34,6 +36,7 @@
             @Html.LabelFor(model => model.CourseStudentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.LabelFor(model => model.CourseStudentEmail, new { @id = "CourseStudentEmail", @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.CourseStudentEmail, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -41,6 +44,7 @@
             @Html.LabelFor(model => model.CourseStudentDepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.LabelFor(model => model.CourseStudentDepartmentCode, new { @id = "CourseStudentDepartmentCode", @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.CourseStudentDepartmentCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -48,6 +52,7 @@
             @Html.LabelFor(model => model.CourseStudentCourse, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CourseStudentCourse, @ViewBag.CourseCode as SelectList, "Select Course", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseStudentCourse, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model.CourseStudentCourse, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +67,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Enroll" class="btn btn-default" />
             </div>
         </div>
     </div>

@@ -176,6 +176,18 @@
     <Compile Include="Migrations\201605011127073_AddTeachersInfoValidation.Designer.cs">
       <DependentUpon>201605011127073_AddTeachersInfoValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605011246384_AddStudentsInfoValidation.cs" />
+    <Compile Include="Migrations\201605011246384_AddStudentsInfoValidation.Designer.cs">
+      <DependentUpon>201605011246384_AddStudentsInfoValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605011324583_ValidationaddedEnrollCourse.cs" />
+    <Compile Include="Migrations\201605011324583_ValidationaddedEnrollCourse.Designer.cs">
+      <DependentUpon>201605011324583_ValidationaddedEnrollCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605011329080_ValidationaddedEnrollCourse-2.cs" />
+    <Compile Include="Migrations\201605011329080_ValidationaddedEnrollCourse-2.Designer.cs">
+      <DependentUpon>201605011329080_ValidationaddedEnrollCourse-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Course.cs" />
@@ -387,6 +399,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605011127073_AddTeachersInfoValidation.resx">
       <DependentUpon>201605011127073_AddTeachersInfoValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011246384_AddStudentsInfoValidation.resx">
+      <DependentUpon>201605011246384_AddStudentsInfoValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011324583_ValidationaddedEnrollCourse.resx">
+      <DependentUpon>201605011324583_ValidationaddedEnrollCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011329080_ValidationaddedEnrollCourse-2.resx">
+      <DependentUpon>201605011329080_ValidationaddedEnrollCourse-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
