@@ -52,22 +52,23 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
+
         public JsonResult GetCourseName(string departmentName)
         {
-            string course = "";
+            List<Course> allCourses = new List<Course>();
 
-            if (!string.IsNullOrEmpty(departmentName))
+            if (departmentName != null)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    course = db.Courses.Where(c => c.CourseCode == departmentName).Select(p => p.CourseName).Single();
+                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseCode).ToList();
                 }
             }
             if (Request.IsAjaxRequest())
             {
                 return new JsonResult
                 {
-                    Data = course,
+                    Data = allCourses,
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
@@ -80,5 +81,36 @@ namespace UniversityApplication.Controllers
                 };
             }
         }
+
+        public JsonResult GetCourseSemester(string departmentName)
+        {
+            List<Course> allCourses = new List<Course>();
+
+            if (departmentName != null)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    allCourses = db.Courses.Where(a => a.CourseDepartmentCode.Equals(departmentName)).OrderBy(a => a.CourseCode).ToList();
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+                    Data = allCourses,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+       
     }
 }

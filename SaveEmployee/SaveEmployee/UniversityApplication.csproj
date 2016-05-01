@@ -152,6 +152,14 @@
     <Compile Include="Migrations\201604290451031_droppedManyColumns.Designer.cs">
       <DependentUpon>201604290451031_droppedManyColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605010406193_ChangedCourseTeacher.cs" />
+    <Compile Include="Migrations\201605010406193_ChangedCourseTeacher.Designer.cs">
+      <DependentUpon>201605010406193_ChangedCourseTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605010516596_addedCourseTeacherCourseCredit.cs" />
+    <Compile Include="Migrations\201605010516596_addedCourseTeacherCourseCredit.Designer.cs">
+      <DependentUpon>201605010516596_addedCourseTeacherCourseCredit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Course.cs" />
@@ -260,6 +268,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604290451031_droppedManyColumns.resx">
       <DependentUpon>201604290451031_droppedManyColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605010406193_ChangedCourseTeacher.resx">
+      <DependentUpon>201605010406193_ChangedCourseTeacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605010516596_addedCourseTeacherCourseCredit.resx">
+      <DependentUpon>201605010516596_addedCourseTeacherCourseCredit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

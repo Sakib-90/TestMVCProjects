@@ -38,6 +38,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CourseStaticsCourseName)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseStaticsCoursSemester)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseStaticsCourseTeacher)
+                </th>
             </tr>
 
             <tr>
@@ -48,6 +54,12 @@
                 </td>
                 <td>
                     <p id="CourseStaticsCourseName"></p>
+                </td>
+                <td>
+                    <p id="CourseStaticsCourseSemester"></p>
+                </td>
+                <td>
+                    <p id="CourseStaticsCourseTeacher"></p>
                 </td>
             </tr>
         </table>
@@ -75,8 +87,8 @@
                 var departmentName = $("#CourseStaticsDepartmentCode").val();
                 if (departmentName != null) {
 
-
                     var ddCredit = $("#CourseStaticsCourseCode");
+                    
                     ddCredit.empty(); // this line is for clear all items from Teacher dropdown
                     // ddCredit.append($("<option></option").val("").html("Select Teacher"));
 
@@ -107,41 +119,91 @@
 
     </script>
 
-<script>
+    <script>
 
-    $(document).ready(function () {
+        $(document).ready(function() {
 
-        $("#CourseStaticsDepartmentCode").change(function () {
-            // this will call when Department Dropdown select change
-            var departmentName = $("#CourseStaticsDepartmentCode").val();
-            if (departmentName != null) {
+            $("#CourseStaticsDepartmentCode").change(function() {
+                // this will call when Department Dropdown select change
+                var departmentName = $("#CourseStaticsDepartmentCode").val();
+                if (departmentName != null) {
 
 
-                var ddCredit = $("#CourseStaticsCourseName");
-                ddCredit.empty(); // this line is for clear all items from Teacher dropdown
-                // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+                    var ddCredit = $("#CourseStaticsCourseName");
+                    ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                    // ddCredit.append($("<option></option").val("").html("Select Teacher"));
 
-                // Here I will call Controller Action via Jquery to load Teacher for selected Department
-                $.ajax({
-                    context: this,
-                    url: "@Url.Action("GetCourseName", "CourseStaticss")",
-                    type: 'GET',
-                    dataType: "json",
-                    data: { departmentName: departmentName },
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-                        $("#CourseStaticsCourseName").text(data);
-                    },
-                    error: function () {
-                        alert("error CourseStaticsCourseName !");
-                    }
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                    $.ajax({
+                        context: this,
+                        url: "@Url.Action("GetCourseName", "CourseStaticss")",
+                        type: 'GET',
+                        dataType: "json",
+                        data: { departmentName: departmentName },
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(data) {
+                            $.each(data, function(i, val) {
+                                ddCredit.append(
+                                    $("<option></option>").text(val.CourseName)
+                                );
+                            });
 
-                });
-            }
+                        },
+                        error: function() {
+                            alert("error CourseStaticsCourseName !");
+                        }
+
+                    });
+                }
+            });
         });
-    });
 
-</script>
+    </script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            $("#CourseStaticsDepartmentCode").change(function() {
+                // this will call when Department Dropdown select change
+                var departmentName = $("#CourseStaticsDepartmentCode").val();
+                if (departmentName != null) {
+
+
+                    var ddCredit = $("#CourseStaticsCourseSemester");
+                    ddCredit.empty(); // this line is for clear all items from Teacher dropdown
+                    // ddCredit.append($("<option></option").val("").html("Select Teacher"));
+
+                    // Here I will call Controller Action via Jquery to load Teacher for selected Department
+                    $.ajax({
+                        context: this,
+                        url: "@Url.Action("GetCourseSemester", "CourseStaticss")",
+                        type: 'GET',
+                        dataType: "json",
+                        data: { departmentName: departmentName },
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(data) {
+                            $.each(data, function(i, val) {
+                                ddCredit.append(
+                                    $("<option></option>").text(val.CourseSemester)
+                                );
+                            });
+
+                        },
+                        error: function() {
+                            alert("error CourseStaticsCourseSemester !");
+                        }
+
+                    });
+                }
+            });
+        });
+
+    </script>
+
+
+
+
 
 
 

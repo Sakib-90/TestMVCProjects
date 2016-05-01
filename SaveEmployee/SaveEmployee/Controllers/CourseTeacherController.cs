@@ -94,8 +94,11 @@ namespace UniversityApplication.Controllers
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     courseTeacher.CourseTeacherCourseCredit = db.Courses.Where(c => c.CourseCode == courseTeacher.CourseTeacherCourseCode).Select(p => (double?)p.CourseCredit).Single();
-                    
-                    
+
+                    courseTeacher.CourseTeacherTeacherName =
+                        db.Teachers.Where(a => a.TeacherEmail.Equals(courseTeacher.CourseTeacherEmail))
+                            .Select(p => p.TeacherName)
+                            .Single();
                     db.CoursesTeachers.Add(courseTeacher);
                     db.SaveChanges();
                     ModelState.Clear();

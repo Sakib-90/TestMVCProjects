@@ -17,16 +17,16 @@ namespace UniversityApplication.Models
         [DisplayName("Remaining Credit")]
         [NotMapped]
         public double? CourseTeacherRemainingCredit { get; set; }
-        [DisplayName("Code")]
+        [DisplayName("Course Code")]
         [Remote("IsCodeExists", "CourseTeacher", ErrorMessage = "Course already assigned")]
-        [NotMapped]
         public string CourseTeacherCourseCode { get; set; }
         [DisplayName("Name")]
         [NotMapped]
         public string CourseTeacherCourseName { get; set; }
         [DisplayName("Credit")]
-        [NotMapped]
         public double? CourseTeacherCourseCredit { get; set; }
+
+        public string CourseTeacherTeacherName { get; set; }
         
         [Key]
         public int CourseTeacherID { get; set; }

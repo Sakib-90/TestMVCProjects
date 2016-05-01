@@ -30,3 +30,5 @@ F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\SaveEmployee.pdb
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.csprojResolveAssemblyReference.cache
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.droppedManyColumns.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.csproj.GenerateResource.Cache
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.ChangedCourseTeacher.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.addedCourseTeacherCourseCredit.resources
