@@ -24,8 +24,10 @@ namespace UniversityApplication.Models
         [DisplayName("Description")]
         public string CourseDescription { get; set; }
         [DisplayName("Department")]
+        [Required(ErrorMessage = " Please select a Department ")]
         public string CourseDepartmentCode { get; set; }
         [DisplayName("Semester")]
+        [Required(ErrorMessage = " Please select a Semester ")]
         public string CourseSemester { get; set; }
     }
 }

@@ -33,3 +33,6 @@ F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplicat
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.ChangedCourseTeacher.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.addedCourseTeacherCourseCredit.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.addedTeacherNameToCourseTeacher.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.AddRequiredFieldToCourseAndSemester.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.AddTeachersDesignationValidation.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.AddTeachersInfoValidation.resources

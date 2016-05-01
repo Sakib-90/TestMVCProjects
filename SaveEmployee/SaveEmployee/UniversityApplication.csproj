@@ -164,6 +164,18 @@
     <Compile Include="Migrations\201605010834042_addedTeacherNameToCourseTeacher.Designer.cs">
       <DependentUpon>201605010834042_addedTeacherNameToCourseTeacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605011100456_AddRequiredFieldToCourseAndSemester.cs" />
+    <Compile Include="Migrations\201605011100456_AddRequiredFieldToCourseAndSemester.Designer.cs">
+      <DependentUpon>201605011100456_AddRequiredFieldToCourseAndSemester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605011120310_AddTeachersDesignationValidation.cs" />
+    <Compile Include="Migrations\201605011120310_AddTeachersDesignationValidation.Designer.cs">
+      <DependentUpon>201605011120310_AddTeachersDesignationValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605011127073_AddTeachersInfoValidation.cs" />
+    <Compile Include="Migrations\201605011127073_AddTeachersInfoValidation.Designer.cs">
+      <DependentUpon>201605011127073_AddTeachersInfoValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Course.cs" />
@@ -216,8 +228,93 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="UCRMSHome\css\agency.css" />
+    <Content Include="UCRMSHome\css\bootstrap.css" />
+    <Content Include="UCRMSHome\css\bootstrap.min.css" />
+    <Content Include="UCRMSHome\font-awesome\css\font-awesome.css" />
+    <Content Include="UCRMSHome\font-awesome\css\font-awesome.min.css" />
+    <Content Include="UCRMSHome\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="UCRMSHome\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="UCRMSHome\img\about\1.jpg" />
+    <Content Include="UCRMSHome\img\about\2.jpg" />
+    <Content Include="UCRMSHome\img\about\3.jpg" />
+    <Content Include="UCRMSHome\img\about\4.jpg" />
+    <Content Include="UCRMSHome\img\header-bg.jpg" />
+    <Content Include="UCRMSHome\img\logos\aetuts.jpg" />
+    <Content Include="UCRMSHome\img\logos\creative-market.jpg" />
+    <Content Include="UCRMSHome\img\logos\designmodo.jpg" />
+    <Content Include="UCRMSHome\img\logos\envato.jpg" />
+    <Content Include="UCRMSHome\img\logos\microlancer.jpg" />
+    <Content Include="UCRMSHome\img\logos\themeforest.jpg" />
+    <Content Include="UCRMSHome\img\logos\wordpress.jpg" />
+    <Content Include="UCRMSHome\img\map-image.png" />
+    <Content Include="UCRMSHome\img\portfolio\dreams-preview.png" />
+    <Content Include="UCRMSHome\img\portfolio\dreams.png" />
+    <Content Include="UCRMSHome\img\portfolio\escape-preview.png" />
+    <Content Include="UCRMSHome\img\portfolio\escape.png" />
+    <Content Include="UCRMSHome\img\portfolio\golden-preview.png" />
+    <Content Include="UCRMSHome\img\portfolio\golden.png" />
+    <Content Include="UCRMSHome\img\portfolio\roundicons-free.png" />
+    <Content Include="UCRMSHome\img\portfolio\roundicons.png" />
+    <Content Include="UCRMSHome\img\portfolio\startup-framework-preview.png" />
+    <Content Include="UCRMSHome\img\portfolio\startup-framework.png" />
+    <Content Include="UCRMSHome\img\portfolio\treehouse-preview.png" />
+    <Content Include="UCRMSHome\img\portfolio\treehouse.png" />
+    <Content Include="UCRMSHome\img\team\1.jpg" />
+    <Content Include="UCRMSHome\img\team\2.jpg" />
+    <Content Include="UCRMSHome\img\team\3.jpg" />
+    <Content Include="UCRMSHome\Home.html" />
+    <Content Include="UCRMSHome\js\agency.js" />
+    <Content Include="UCRMSHome\js\bootstrap.js" />
+    <Content Include="UCRMSHome\js\bootstrap.min.js" />
+    <Content Include="UCRMSHome\js\cbpAnimatedHeader.js" />
+    <Content Include="UCRMSHome\js\cbpAnimatedHeader.min.js" />
+    <Content Include="UCRMSHome\js\classie.js" />
+    <Content Include="UCRMSHome\js\contact_me.js" />
+    <Content Include="UCRMSHome\js\jqBootstrapValidation.js" />
+    <Content Include="UCRMSHome\js\jquery.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="UCRMSHome\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="UCRMSHome\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="UCRMSHome\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="UCRMSHome\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="UCRMSHome\font-awesome\less\bordered-pulled.less" />
+    <Content Include="UCRMSHome\font-awesome\less\core.less" />
+    <Content Include="UCRMSHome\font-awesome\less\fixed-width.less" />
+    <Content Include="UCRMSHome\font-awesome\less\font-awesome.less" />
+    <Content Include="UCRMSHome\font-awesome\less\icons.less" />
+    <Content Include="UCRMSHome\font-awesome\less\larger.less" />
+    <Content Include="UCRMSHome\font-awesome\less\list.less" />
+    <Content Include="UCRMSHome\font-awesome\less\mixins.less" />
+    <Content Include="UCRMSHome\font-awesome\less\path.less" />
+    <Content Include="UCRMSHome\font-awesome\less\rotated-flipped.less" />
+    <Content Include="UCRMSHome\font-awesome\less\spinning.less" />
+    <Content Include="UCRMSHome\font-awesome\less\stacked.less" />
+    <Content Include="UCRMSHome\font-awesome\less\variables.less" />
+    <Content Include="UCRMSHome\font-awesome\scss\font-awesome.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_core.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_icons.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_larger.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_list.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_mixins.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_path.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_spinning.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_stacked.scss" />
+    <Content Include="UCRMSHome\font-awesome\scss\_variables.scss" />
+    <Content Include="UCRMSHome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="UCRMSHome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="UCRMSHome\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UCRMSHome\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="UCRMSHome\less\agency.less" />
+    <Content Include="UCRMSHome\less\mixins.less" />
+    <Content Include="UCRMSHome\less\variables.less" />
+    <Content Include="UCRMSHome\LICENSE" />
+    <Content Include="UCRMSHome\mail\contact_me.php" />
+    <Content Include="UCRMSHome\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -281,6 +378,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605010834042_addedTeacherNameToCourseTeacher.resx">
       <DependentUpon>201605010834042_addedTeacherNameToCourseTeacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011100456_AddRequiredFieldToCourseAndSemester.resx">
+      <DependentUpon>201605011100456_AddRequiredFieldToCourseAndSemester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011120310_AddTeachersDesignationValidation.resx">
+      <DependentUpon>201605011120310_AddTeachersDesignationValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011127073_AddTeachersInfoValidation.resx">
+      <DependentUpon>201605011127073_AddTeachersInfoValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -55,6 +55,7 @@
             @Html.LabelFor(model => model.CourseDepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CourseDepartmentCode, new SelectList(ViewBag.Departments, "Value","Text"),"Select Department", new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.CourseDepartmentCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -63,7 +64,7 @@
             <div class="col-md-10">
 
                 @Html.DropDownListFor(model => model.CourseSemester, new SelectList(ViewBag.Semesters, "Value", "Text"), "Select Semester", new { @class = "form-control" })
-
+                @Html.ValidationMessageFor(model => model.CourseSemester, "", new { @class = "text-danger" })
             </div>
         </div>
 
