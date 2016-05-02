@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using UniversityApplication.Context;
@@ -66,13 +67,16 @@ namespace UniversityApplication.Controllers
                 //return RedirectToAction("Index");
                 return RedirectToAction("StudentToCourse");
             }
+            ModelState.Clear();
+            return View();
 
-            return View(courseStudent);
+            //return View(courseStudent);
         }
 
-        public JsonResult IsCourseCodeExists(string courseCode)
+        public JsonResult IsCourseNameExists(string CourseStudentCourse)
         {
-            return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == courseCode), JsonRequestBehavior.AllowGet);
+            return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == CourseStudentCourse ), JsonRequestBehavior.AllowGet);
+            //return Json(!db.CoursesStudents.Where(x => x.CourseStudentCourse == CourseStudentCourse && x.CourseStudentRegNo == CourseStudentRegNo), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetStudentName(string studentRegNo)
         {

@@ -17,23 +17,20 @@ namespace UniversityApplication.Models
         [DisplayName("Student Reg. No.")]
         public string CourseStudentRegNo { get; set; }
 
-        [Required]
         [DisplayName("Name")]
         [NotMapped]
         public string CourseStudentName { get; set; }
 
-        [Required]
         [DisplayName("Email")]
         [NotMapped]
         public string CourseStudentEmail { get; set; }
 
-        [Required]
         [DisplayName("Department")]
         [NotMapped]
         public string CourseStudentDepartmentCode { get; set; }
 
         [Required]
-        [Remote("IsCourseCodeExists","CourseStudents", ErrorMessage="Course Already Taken")]
+        [Remote("IsCourseNameExists", "CourseStudents", ErrorMessage = "Selected Student has taken this course already.")]
         [DisplayName("Select Course")]
         public string CourseStudentCourse { get; set; }
 
