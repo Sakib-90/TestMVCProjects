@@ -73,9 +73,9 @@ namespace UniversityApplication.Controllers
             //return View(courseStudent);
         }
 
-        public JsonResult IsCourseNameExists(string CourseStudentCourse)
+        public JsonResult IsCourseNameExists(string courseStudentCourse)
         {
-            return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == CourseStudentCourse ), JsonRequestBehavior.AllowGet);
+            return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == courseStudentCourse ), JsonRequestBehavior.AllowGet);
             //return Json(!db.CoursesStudents.Where(x => x.CourseStudentCourse == CourseStudentCourse && x.CourseStudentRegNo == CourseStudentRegNo), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetStudentName(string studentRegNo)
