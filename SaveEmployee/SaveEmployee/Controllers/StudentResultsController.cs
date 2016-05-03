@@ -20,23 +20,23 @@ namespace UniversityApplication.Controllers
         // GET: StudentResults/Create
         public ActionResult SaveResult()
         {
-            List<Student> allRegisteredStudents = new List<Student>();
-            List<CourseStudent> allCourses = new List<CourseStudent>();
+            //List<Student> allRegisteredStudents = new List<Student>();
+            //List<CourseStudent> allCourses = new List<CourseStudent>();
             GenerateDropDownValue();
 
-            string studentName = "";
-            string studentEmail = "";
-            string studentDepartment = "";
+            //string studentName = "";
+            //string studentEmail = "";
+            //string studentDepartment = "";
 
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
-            }
-            ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo");
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseStudentCourse", "CourseStudentCourse");
-            ViewBag.StudentName = studentName;
-            ViewBag.StudentEmail = studentEmail;
-            ViewBag.StudentDepartment = studentDepartment;
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
+            //}
+            //ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo");
+            //ViewBag.CourseCode = new SelectList(allCourses, "CourseStudentCourse", "CourseStudentCourse");
+            //ViewBag.StudentName = studentName;
+            //ViewBag.StudentEmail = studentEmail;
+            //ViewBag.StudentDepartment = studentDepartment;
 
             return View();
         }
@@ -45,23 +45,24 @@ namespace UniversityApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveResult([Bind(Include = "StudentResultRegNo,StudentResultName,StudentResultEmail,StudentResultDepartmentCode,StudentResultCourse,StudentResultGrade")] StudentResult studentResult)
         {
-            List<Student> allRegisteredStudents = new List<Student>();
-            List<Course> allCourses = new List<Course>();
-
             GenerateDropDownValue();
-            string studentName = "";
-            string studentEmail = "";
-            string studentDepartment = "";
 
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
-            }
-            ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo", studentResult.StudentResultRegNo);
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseStudentCourse", "CourseStudentCourse", studentResult.StudentResultCourse);
-            ViewBag.StudentName = studentName;
-            ViewBag.StudentEmail = studentEmail;
-            ViewBag.StudentDepartment = studentDepartment;
+            //List<Student> allRegisteredStudents = new List<Student>();
+            //List<Course> allCourses = new List<Course>();
+            //string studentName = "";
+
+            //string studentEmail = "";
+            //string studentDepartment = "";
+
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
+            //}
+            //ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo", studentResult.StudentResultRegNo);
+            //ViewBag.CourseCode = new SelectList(allCourses, "CourseStudentCourse", "CourseStudentCourse", studentResult.StudentResultCourse);
+            //ViewBag.StudentName = studentName;
+            //ViewBag.StudentEmail = studentEmail;
+            //ViewBag.StudentDepartment = studentDepartment;
 
             if (ModelState.IsValid)
             {
@@ -76,6 +77,35 @@ namespace UniversityApplication.Controllers
 
         private void GenerateDropDownValue()
         {
+            List<Student> allRegisteredStudents = new List<Student>();
+            List<SelectListItem> students = new List<SelectListItem>();
+
+            List<CourseStudent> allCourses = new List<CourseStudent>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
+            }
+
+            foreach (var student in allRegisteredStudents)
+            {
+                students.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = student.StudentRegNo,
+                        Text = student.StudentRegNo
+                    }
+                    );
+            }
+            ViewBag.Students = students;
+
+            ViewBag.CourseCode = new SelectList(allCourses, "CourseStudentCourse", "CourseStudentCourse");
+
+            ViewBag.StudentName = "";
+            ViewBag.StudentEmail = "";
+            ViewBag.StudentDepartment = "";
+
             var results = resultManager.GetResults();
 
             List<SelectListItem> resultList = new List<SelectListItem>();
