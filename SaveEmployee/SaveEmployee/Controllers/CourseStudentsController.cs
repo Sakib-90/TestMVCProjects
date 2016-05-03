@@ -73,6 +73,7 @@ namespace UniversityApplication.Controllers
             ViewBag.StudentEmail = studentEmail;
             ViewBag.StudentDepartment = studentDepartment;
         }
+        
         public JsonResult IsCourseNameExists(string CourseStudentCourse, string CourseStudentRegNo)
         {
             return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == CourseStudentCourse && x.CourseStudentRegNo == CourseStudentRegNo), JsonRequestBehavior.AllowGet);
