@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+
+
+
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using UniversityApplication.Controllers;
 
 namespace UniversityApplication.Models
 {
@@ -30,7 +30,7 @@ namespace UniversityApplication.Models
         public string CourseStudentDepartmentCode { get; set; }
 
         [Required]
-        [Remote("IsCourseNameExists", "CourseStudents", ErrorMessage = "Selected Student has taken this course already.")]
+        [Remote("IsCourseNameExists", "CourseStudents", AdditionalFields = "CourseStudentRegNo", ErrorMessage = "Selected Student has taken this course already.")]
         [DisplayName("Select Course")]
         public string CourseStudentCourse { get; set; }
 
