@@ -20,7 +20,6 @@ namespace UniversityApplication.Controllers
         DepartmentManager departmentManager = new DepartmentManager();
 
         
-        // GET: Students/Create
         public ActionResult Create()
         {
             GenerateDropDownValue();
@@ -41,12 +40,11 @@ namespace UniversityApplication.Controllers
             {
                 try
                 {
-                    var year = student.StudeRegDate.Year;
+                    //var year = student.StudeRegDate.Year;
 
                     string combineDepartmentYear = student.StudentDepartmentCode + "-" +
-                                                   student.StudeRegDate.Year.ToString() + "-";
-                    student.StudentRegNo = combineDepartmentYear + GetSerial(combineDepartmentYear); //ConstructorNeedsTagAttribute to change here
-                    //GetSerial(student.StudentDepartmentCode, student.StudeRegDate.Year.ToString());
+                                                   student.StudeRegDate.Year + "-";
+                    student.StudentRegNo = combineDepartmentYear + GetSerial(combineDepartmentYear); 
                     db.Students.Add(student);
                     db.SaveChanges();
                     ViewBag.Status = "Success";

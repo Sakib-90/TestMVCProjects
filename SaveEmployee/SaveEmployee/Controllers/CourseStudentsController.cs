@@ -10,28 +10,10 @@ namespace UniversityApplication.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
         
-        // GET: CourseStudents/Create
         public ActionResult StudentToCourse()
         {
 
             GenerateDropDownValue();
-            //List<Student> allRegisteredStudents = new List<Student>();
-            //List<Course> allCourses = new List<Course>();
-
-            //string studentName = "";
-            //string studentEmail = "";
-            //string studentDepartment = "";
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    allRegisteredStudents = db.Students.OrderBy(a=>a.StudentRegNo).ToList();
-            //}
-            //ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo");
-            //ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseName");
-            //ViewBag.StudentName = studentName;
-            //ViewBag.StudentEmail = studentEmail;
-            //ViewBag.StudentDepartment = studentDepartment;
-
             return View();
         }
 
@@ -41,44 +23,29 @@ namespace UniversityApplication.Controllers
         public ActionResult StudentToCourse([Bind(Include = "CourseStudentID,CourseStudentRegNo,CourseStudentName,CourseStudentEmail,CourseStudentDepartmentCode,CourseStudentCourse,CourseStudentRegDate")] CourseStudent courseStudent)
         {
             GenerateDropDownValue();
-            //List<Student> allRegisteredStudents = new List<Student>();
-            //List<Course> allCourses = new List<Course>();
-            //string studentName = "";
-            //string studentEmail = "";
-            //string studentDepartment = "";
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    allRegisteredStudents = db.Students.OrderBy(a => a.StudentRegNo).ToList();
-            //}
-            //ViewBag.Students = new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo", courseStudent.CourseStudentRegNo);
-            //ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseName",courseStudent.CourseStudentCourse);
-            //ViewBag.StudentName = studentName;
-            //ViewBag.StudentEmail = studentEmail;
-            //ViewBag.StudentDepartment = studentDepartment;
 
             if (ModelState.IsValid)
             {
                 db.CoursesStudents.Add(courseStudent);
                 db.SaveChanges();
                 ModelState.Clear();
-                //return RedirectToAction("StudentToCourse");
+                
                 return View();
             }
             ModelState.Clear();
-            //return RedirectToAction("StudentToCourse");
+            
             return View();
-
-            //return View(courseStudent);
+            
         }
 
         private void GenerateDropDownValue()
         {
-            List<SelectListItem> students = new List<SelectListItem>();
             List<Student> allRegisteredStudents = new List<Student>();
-            List<SelectListItem> courses = new List<SelectListItem>();
+            List<SelectListItem> students = new List<SelectListItem>();
 
             List<Course> allCourses = new List<Course>();
+            
+
             string studentName = "";
             string studentEmail = "";
             string studentDepartment = "";
@@ -100,31 +67,7 @@ namespace UniversityApplication.Controllers
                     );
             }
 
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    allCourses = db.Courses.OrderBy(a => a.CourseCode).ToList();
-            //}
-
-            //foreach (var course in allCourses)
-            //{
-            //    courses.Add(
-
-            //        new SelectListItem()
-            //        {
-            //            //Value = course.CourseCode,
-            //            //Text = course.CourseName
-
-            //            Value = "",
-            //            Text = ""
-            //        }
-            //        );
-            //}
-
-
-            ViewBag.Students = students;//new SelectList(allRegisteredStudents, "StudentRegNo", "StudentRegNo", courseStudent.CourseStudentRegNo);
-           // ViewBag.CourseCode = courses;//new SelectList(allCourses, "CourseCode", "CourseName", courseStudent.CourseStudentCourse);
-
+            ViewBag.Students = students;
             ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseName");
             ViewBag.StudentName = studentName;
             ViewBag.StudentEmail = studentEmail;
@@ -132,7 +75,6 @@ namespace UniversityApplication.Controllers
         }
         public JsonResult IsCourseNameExists(string CourseStudentCourse, string CourseStudentRegNo)
         {
-            //return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == CourseStudentCourse ), JsonRequestBehavior.AllowGet);
             return Json(!db.CoursesStudents.Any(x => x.CourseStudentCourse == CourseStudentCourse && x.CourseStudentRegNo == CourseStudentRegNo), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetStudentName(string studentRegNo)

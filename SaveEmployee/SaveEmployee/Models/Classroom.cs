@@ -13,7 +13,6 @@ namespace UniversityApplication.Models
         public string ClassRoomDepartmentCode { get; set; }
         [DisplayName("Course")]
         public string ClassRoomCourseCode { get; set; }
-        [Key]
         [DisplayName("Room No")]
         public string ClassRoomRoomNo { get; set; }
         [DisplayName("Day")]
@@ -24,5 +23,6 @@ namespace UniversityApplication.Models
         [DisplayName("To")]
         [DataType(DataType.Time)]
         public TimeSpan ClassRoomEndssAt { get; set; }
+        public int ClassroomId { get; set; }
     }
 }

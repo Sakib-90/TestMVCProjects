@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using UniversityApplication.BLL;
 using UniversityApplication.Context;
@@ -16,25 +11,11 @@ namespace UniversityApplication.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        DepartmentManager departmentManager = new DepartmentManager();
         RoomManager roomManager = new RoomManager();
-
-        // GET: Classrooms
-       
+      
         public ActionResult AllocateClassRoom()
         {
-            List<Department> allDepartments = new List<Department>();
-            List<Course> allCourses = new List<Course>();
-            
             GenerateDropDownValue();
-            
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
-            }
-
-            ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName");
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
 
             return View();
         }
@@ -42,42 +23,15 @@ namespace UniversityApplication.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AllocateClassRoom([Bind(Include = "ClassRoomRoomNo,ClassRoomDepartmentCode,ClassRoomCourseID,ClassRoomWeekDay,ClassRoomStartsAt,ClassRoomEndssAt")] Classroom classroom)
+        public ActionResult AllocateClassRoom([Bind(Include = "ClassRoomRoomNo,ClassRoomDepartmentCode,ClassRoomCourseID,ClassRoomWeekDay,ClassRoomStartsAt,ClassRoomEndssAt,ClassRoomCourseCode")] Classroom classroom)
         {
-            List<Department> allDepartments = new List<Department>();
-            List<Course> allCourses = new List<Course>();
-
             GenerateDropDownValue();
-
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
-
-                if (classroom != null)
-                {
-
-
-                    if (classroom.ClassRoomCourseCode != null)
-                    {
-                        allCourses =
-                             db.Courses.Where(a => a.CourseCode.Equals(classroom.ClassRoomCourseCode))
-                                 .OrderBy(a => a.CourseName)
-                                 .ToList();
-                    }
-
-                }
-            }
-
-            ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName", classroom.ClassRoomDepartmentCode);
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode", classroom.ClassRoomCourseCode);
-
+            
             if (ModelState.IsValid)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    //courseTeacher.CourseTeacherCourseCredit = db.Courses.Where(c => c.CourseCode == courseTeacher.CourseTeacherCourseCode).Select(p => (double?)p.CourseCredit).Single();
-
-
+                    
                     db.Classrooms.Add(classroom);
                     db.SaveChanges();
                     ModelState.Clear();
@@ -119,6 +73,31 @@ namespace UniversityApplication.Controllers
 
         private void GenerateDropDownValue()
         {
+            List<Department> allDepartments = new List<Department>();
+            List<SelectListItem> departments = new List<SelectListItem>();
+            List<Course> allCourses = new List<Course>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
+            }
+
+            foreach (var department in allDepartments)
+            {
+                departments.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = department.DepartmentCode,
+                        Text = department.DepartmentName
+                    }
+                    );
+            }
+
+            ViewBag.Departments = departments;
+            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
+            
+            
             var rooms = roomManager.GetRooms();
 
             List<SelectListItem> roomList = new List<SelectListItem>();
@@ -139,7 +118,6 @@ namespace UniversityApplication.Controllers
 
             List<SelectListItem> weekdays = new List<SelectListItem>
             {
-                //new SelectListItem {Text = "--Select--", Value = ""},
                 new SelectListItem {Text = "Saturday", Value = "Saturday"},
                 new SelectListItem {Text = "Sunday", Value = "Sunday"},
                 new SelectListItem {Text = "Monday", Value = "Monday"},

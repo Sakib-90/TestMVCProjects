@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201605011329080_ValidationaddedEnrollCourse-2.Designer.cs">
       <DependentUpon>201605011329080_ValidationaddedEnrollCourse-2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605031054312_NewKeyAddedToClassRoom.cs" />
+    <Compile Include="Migrations\201605031054312_NewKeyAddedToClassRoom.Designer.cs">
+      <DependentUpon>201605031054312_NewKeyAddedToClassRoom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Course.cs" />
@@ -408,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605011329080_ValidationaddedEnrollCourse-2.resx">
       <DependentUpon>201605011329080_ValidationaddedEnrollCourse-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605031054312_NewKeyAddedToClassRoom.resx">
+      <DependentUpon>201605031054312_NewKeyAddedToClassRoom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

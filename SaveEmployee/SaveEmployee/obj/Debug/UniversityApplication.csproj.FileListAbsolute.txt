@@ -39,3 +39,4 @@ F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplicat
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.AddStudentsInfoValidation.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.ValidationaddedEnrollCourse.resources
 F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.ValidationaddedEnrollCourse2.resources
+F:\GitHub\TestMVCProjects\SaveEmployee\SaveEmployee\obj\Debug\UniversityApplication.Migrations.NewKeyAddedToClassRoom.resources

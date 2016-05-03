@@ -19,14 +19,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherDepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CourseTeacherDepartmentCode, @ViewBag.Departments as SelectList, "Select Department", new { @class = "form-control" })
+                @*@Html.DropDownListFor(model => model.CourseTeacherDepartmentCode, @ViewBag.Departments as SelectList, "Select Department", new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.CourseTeacherDepartmentCode, new SelectList(ViewBag.Departments, "Value", "Text"), "Select Department", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CourseTeacherEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CourseTeacherEmail, @ViewBag.TeachersName as SelectList, "Select Teacher", new { @class = "form-control" })
+                @*@Html.DropDownListFor(model => model.CourseTeacherEmail, @ViewBag.TeachersName as SelectList, "Select Teacher", new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.CourseTeacherEmail, new SelectList(ViewBag.TeachersName, "Value", "Text"), "Select Teacher", new { @class = "form-control" })
             </div>
         </div>
 
@@ -109,7 +111,7 @@
                             });
                         },
                         error: function() {
-                            alert("Error int GetTeachers!");
+                            alert("Error  GetTeachers!");
                         }
                     });
 

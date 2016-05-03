@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using UniversityApplication.BLL;
 using UniversityApplication.Context;
 using UniversityApplication.Models;
 
@@ -14,28 +10,9 @@ namespace UniversityApplication.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
         
-        // GET: CourseTeacher
         public ActionResult AssignCourse()
         {
-            List<Department> allDepartments = new List<Department>();
-            List<Teacher> allTeachers = new List<Teacher>();
-            List<Course> allCourses = new List<Course>();
-
-            double creditToTake = 0.0;
-            double remainingCredit = 0.0;
-
-
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
-            }
-
-            ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName");
-            ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName");
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
-
-            ViewBag.CreditToTake = creditToTake.ToString();
-            ViewBag.RemainingCredit = remainingCredit.ToString();
+            GenerateDropDownValue();
             
             return View();
         }
@@ -45,51 +22,7 @@ namespace UniversityApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AssignCourse(CourseTeacher courseTeacher)
         {
-            List<Department> allDepartments = new List<Department>();
-            List<Teacher> allTeachers = new List<Teacher>();
-            List<Course> allCourses = new List<Course>();
-
-            double creditToTake = 0.0;
-            double remainingCredit = 0.0;
-
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                allDepartments = db.Departments.OrderBy(a => a.DepartmentName).ToList();
-
-                if (courseTeacher != null) 
-                {
-                    if (courseTeacher.CourseTeacherEmail != null)
-                    {
-                        allTeachers =
-                            db.Teachers.Where(a => a.TeacherDepartmentCode.Equals(courseTeacher.CourseTeacherDepartmentCode))
-                                .OrderBy(a => a.TeacherName)
-                                .ToList();
-                    }
-
-                    if (courseTeacher.CourseTeacherCourseCode != null)
-                    {
-                       allCourses =
-                            db.Courses.Where(a => a.CourseCode.Equals(courseTeacher.CourseTeacherCourseCode))
-                                .OrderBy(a => a.CourseName)
-                                .ToList();
-                    }
-
-
-
-                }
-            }
-
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                creditToTake = (db.Teachers.Where(p => p.TeacherEmail == courseTeacher.CourseTeacherEmail).Select(p => p.TeacherCredit)).Single();
-            }
-
-            ViewBag.Departments = new SelectList(allDepartments, "DepartmentCode", "DepartmentName", courseTeacher.CourseTeacherDepartmentCode);
-            ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName", courseTeacher.CourseTeacherEmail);
-            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode", courseTeacher.CourseTeacherCourseCode);
-
-            ViewBag.CreditToTake = creditToTake.ToString();
-            ViewBag.RemainingCredit = remainingCredit.ToString();
+            GenerateDropDownValue();
             
             if (ModelState.IsValid)
             {
@@ -108,6 +41,38 @@ namespace UniversityApplication.Controllers
                 }
             }
             return View(courseTeacher);
+        }
+
+        private void GenerateDropDownValue()
+        {
+            List<Department> alldeDepartments = new List<Department>();
+            List<SelectListItem> departments = new List<SelectListItem>();
+
+            List<Course> allCourses = new List<Course>();
+            List<Teacher> allTeachers = new List<Teacher>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                alldeDepartments = db.Departments.OrderBy(a => a.DepartmentCode).ToList();
+            }
+
+            foreach (var department in alldeDepartments)
+            {
+                departments.Add(
+
+                    new SelectListItem()
+                    {
+                        Value = department.DepartmentCode,
+                        Text = department.DepartmentName
+                    }
+                    );
+            }
+
+            ViewBag.Departments = departments;
+            ViewBag.TeachersName = new SelectList(allTeachers, "TeacherEmail", "TeacherName");
+            ViewBag.CourseCode = new SelectList(allCourses, "CourseCode", "CourseCode");
+            ViewBag.CreditToTake = "0.0";
+            ViewBag.RemainingCredit = "0.0";
         }
 
         public JsonResult IsCodeExists(string courseTeacherCourseCode)
