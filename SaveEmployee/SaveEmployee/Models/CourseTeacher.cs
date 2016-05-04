@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿
+
+//*********************SAKIB VERSION ********************\\
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
@@ -7,6 +11,7 @@ namespace UniversityApplication.Models
 {
     public class CourseTeacher
     {
+        
         [DisplayName("Department")]
         public string CourseTeacherDepartmentCode { get; set; }
         [DisplayName("Teacher")]
